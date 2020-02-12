@@ -9,6 +9,6 @@ public class RouterBean implements Router {
 
     @Override
     public String navigateByUrl(String input) {
-        return input;
+        return "faces/"+input;
     }
 }

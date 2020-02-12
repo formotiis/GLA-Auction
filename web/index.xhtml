@@ -12,11 +12,9 @@
         <fieldset>
             <legend>Welcome to the auctions website</legend>
             <h:commandButton value="Login"
-                             action="#{hello.greet}"/>
+                             action='#{router.navigateByUrl("hello")}'/>
             <h:commandButton value="Register"
-                             action='#{hello.compliment}'/>
-
-
+                             action='#{router.navigateByUrl("register")}'/>
             <br/>
 
         </fieldset>
