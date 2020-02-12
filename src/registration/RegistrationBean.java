@@ -143,6 +143,6 @@ public class RegistrationBean {
         return nameHandler.greetingsMessage(p);
     }
     public String goBack(){
-        return "listpersons";
+        return "index";
     }
 }
