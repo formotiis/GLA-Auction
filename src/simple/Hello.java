@@ -55,6 +55,6 @@ public class Hello {
 
     
     public String greet() {
-        return "hello"; 
+        return "hello";
     }
 }

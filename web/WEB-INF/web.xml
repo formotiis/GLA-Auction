@@ -11,7 +11,7 @@
     </servlet>
     <servlet>
         <servlet-name>DispatchServlet</servlet-name>
-        <servlet-class>DispatchServlet</servlet-class>
+        <servlet-class>simple.DispatchServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
