@@ -1,5 +1,6 @@
 package registration;
 
+import navigation.Router;
 import persistence.Person;
 import persistence.PersonManager;
 
@@ -17,18 +18,19 @@ public class RegistrationBean {
     @Inject
     PersonManager personManager;
 
-    private String firstname;
-    private String lastname;
-    private String username;
-    private String password;
-    private String email;
-    private String phone;
-    private String address;
-    private String city;
-    private String card;
+
+    private String firstname = "1";
+    private String lastname = "1";
+    private String username = "1";
+    private String password = "1";
+    private String email = "1";
+    private String phone = "1";
+    private String address = "1";
+    private String city = "1";
+    private String card = "1";
     private Long id;
     private Integer canceled;
-    private Integer zip;
+    private Integer zip = 1;
     private Person p;
 
 
@@ -136,7 +138,7 @@ public class RegistrationBean {
         p = new Person(firstname, lastname, username, email, phone, address, city,
                 card, canceled, zip);
         personManager.addPerson(p, password);
-        return "greeting";
+        return "hello";
     }
 
     public String greeting(){
