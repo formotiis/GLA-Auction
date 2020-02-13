@@ -5,6 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:link rel="stylesheet" href="./bootstrap.min.css"/>
 <h:head>
     <title>Registration page</title>
 </h:head>
@@ -34,9 +35,9 @@
             <br/>
 
             Password:
-            <h:inputText value="#{registrationBean.password}"
+            <h:inputSecret value="#{registrationBean.password}"
                          id="passwordInput">
-            </h:inputText>
+            </h:inputSecret>
             <br/>
 
             Email:

@@ -62,7 +62,7 @@ public class PersonManagerBean implements PersonManager {
                 if (person.isZipSet()) {
                     sb.append(",ZIP");
                 }
-                if (!person.isCardSet()) {
+                if (person.isCardSet()) {
                     sb.append(",CARD");
                 }
                 sb.append(") VALUES(" + "\'")
@@ -87,7 +87,7 @@ public class PersonManagerBean implements PersonManager {
                 if (person.isZipSet()) {
                     sb.append(',').append(person.getZip());
                 }
-                if (!person.isCardSet()) {
+                if (person.isCardSet()) {
                     sb.append(",\'").append(person.getCard()).append('\'');
                 }
                 sb.append(")");

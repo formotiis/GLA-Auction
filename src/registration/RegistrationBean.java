@@ -138,7 +138,7 @@ public class RegistrationBean {
         p = new Person(firstname, lastname, username, email, phone, address, city,
                 card, canceled, zip);
         personManager.addPerson(p, password);
-        return "hello";
+        return "postregister";
     }
 
     public String greeting(){
