@@ -6,10 +6,7 @@ import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -99,14 +96,53 @@ public class PersonManagerBean implements PersonManager {
 
     // TODO: Implement
     @Override
-    public String getUserByID(int id) {
+    public Person getUserByID(int id) {
+        try {
+            String query = "SELECT * FROM USERS WHERE ID=?";
+            PreparedStatement s = connection.prepareStatement(query);
+            s.setInt(1,id);
+
+            s.execute();
+            s.execute();
+            return getPerson(s.getResultSet());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     // TODO: Implement
     @Override
-    public String getUserByCreditentials(String user, String password) {
+    public Person getUserByCreditentials(String user, String password) {
+        try {
+            String query = "SELECT * FROM USERS WHERE LOGIN LIKE ? AND PASSWORD LIKE ?";
+            PreparedStatement s = connection.prepareStatement(query);
+            s.setString(1, user);
+            s.setString(2, password);
+            s.execute();
+            if(s.getResultSet().getFetchSize()>0)
+            return getPerson(s.getResultSet());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
+    }
+
+    private Person getPerson(ResultSet rs) throws SQLException {
+            Person p = new Person(
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(2),
+                    rs.getString(7),
+                    rs.getString(6),
+                    rs.getString(9),
+                    rs.getString(10),
+                    rs.getString(12),
+                    rs.getLong(1),
+                    rs.getInt(8),
+                    rs.getInt(11)
+            );
+            return p;
     }
 
 }

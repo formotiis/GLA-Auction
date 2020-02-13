@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Login Page</title>
+</h:head>
+<link rel="stylesheet" href='#{router.navigateByUrl("bootstrap.min.css")}'/>
+<h:body>
+    <h:form class="form-group" styleClass="p-4">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="usernameInput">Username</label>
+                <h:inputText type="text" class="form-control" id="usernameInput" value="#{activeUser.usn}"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword4">Password</label>
+                <h:inputSecret type="password" class="form-control" id="inputPassword4" value="#{activeUser.pwd}"/>
+            </div>
+        </div>
+        <h:commandLink action="#{activeUser.postLoginRedirect}">
+            <button type="button" class="btn btn-success mr-2">Login</button></h:commandLink>
+        <h:commandLink action="register"><button type="button" class="btn btn-info">Register</button>
+        </h:commandLink>
+    </h:form>
+</h:body>
+</html>

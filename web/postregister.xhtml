@@ -6,8 +6,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Welcome</title>
+    <title>Welcome Aboard</title>
 </h:head>
+<link rel="stylesheet" href='#{router.navigateByUrl("bootstrap.min.css")}'/>
 <h:body>
     <h:form>
 
@@ -19,7 +20,8 @@
             <h:commandButton value="Go back"
                              action='#{router.navigateByUrl("index")}'/>
             <br/>
-
+            <h:commandLink action='#{router.navigateByUrl("index")}'><button type="button" class="btn btn-outline-info">Cancel</button>
+            </h:commandLink>
         </fieldset>
     </h:form>
 </h:body>

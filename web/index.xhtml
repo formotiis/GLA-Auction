@@ -5,20 +5,14 @@
 <h:head>
     <title>Auction Home</title>
 </h:head>
+<link rel="stylesheet" href='#{router.navigateByUrl("bootstrap.min.css")}'/>
 <h:body>
+    <fieldset class="text-center">
+        <legend >Welcome to the auctions website</legend>
+        <a href='#{router.navigateByUrl("login.xhtml")}'><button type="button" class="btn ml-3 btn-info mr-2"> Login </button></a>
 
-    <h:form>
-
-        <fieldset>
-            <legend>Welcome to the auctions website</legend>
-            <h:commandButton value="Login"
-                             action='#{router.navigateByUrl("hello")}'/>
-            <h:commandButton value="Register"
-                             action='#{router.navigateByUrl("register")}'/>
-            <br/>
-
-        </fieldset>
-    </h:form>
+        <a href='#{router.navigateByUrl("register.xhtml")}'><button type="button" class="btn btn-info mr-3"> Register </button></a>
+    </fieldset>
 </h:body>
 </html>
 
