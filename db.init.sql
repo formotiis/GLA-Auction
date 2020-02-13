@@ -28,6 +28,7 @@ CREATE TABLE ARTICLES (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     OWNER INT NOT NULL,
     NAME VARCHAR(20) NOT NULL,
+    DESCRIPTION VARCHAR(100),
     MINPRICE FLOAT NOT NULL, /* Prix de vente pre-encheres */
     CATEGORIES VARCHAR(100) NOT NULL,
     TIME DATE NOT NULL, /* Date fin de vente */
@@ -51,3 +52,8 @@ CREATE TABLE BIDDING (
 
 INSERT INTO USERS (LOGIN, PASSWORD, FIRSTNAME, LASTNAME, PHONE, EMAIL, ADDRESS, CITY, ZIP, CARD) VALUES 
 ('admin', 'admin', 'Administrator', 'Ofthewebsite', '+33133831132', 'admin@projet.gla', '113 Av. Administration', 'Nancy', 54000, '1234567890123456');
+
+INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
+VALUES (1, 1, 'Projet de GLA',
+        'Un projet de master informatique pour une matière appelée génie logiciel avancé à vendre ;)',
+        300.5, 'Service,Informatique,Antiquité,Technologie', '2020-02-28');
