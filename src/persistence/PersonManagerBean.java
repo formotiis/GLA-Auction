@@ -120,7 +120,6 @@ public class PersonManagerBean implements PersonManager {
             s.setString(1, user);
             s.setString(2, password);
             s.execute();
-            if(s.getResultSet().getFetchSize()>0)
             return getPerson(s.getResultSet());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -129,6 +128,7 @@ public class PersonManagerBean implements PersonManager {
     }
 
     private Person getPerson(ResultSet rs) throws SQLException {
+        if(rs.next()){
             Person p = new Person(
                     rs.getString(4),
                     rs.getString(5),
@@ -143,6 +143,8 @@ public class PersonManagerBean implements PersonManager {
                     rs.getInt(11)
             );
             return p;
+        }
+        return null;
     }
 
 }
