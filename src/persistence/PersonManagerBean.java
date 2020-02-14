@@ -94,7 +94,6 @@ public class PersonManagerBean implements PersonManager {
         return null;
     }
 
-    // TODO: Implement
     @Override
     public Person getUserByID(int id) {
         try {
@@ -111,7 +110,6 @@ public class PersonManagerBean implements PersonManager {
         return null;
     }
 
-    // TODO: Implement
     @Override
     public Person getUserByCreditentials(String user, String password) {
         try {
