@@ -12,13 +12,15 @@ public class Article implements Serializable {
     private Double price;
     private Date end;
     List<String> categories;
+    private String description;
 
-    public Article(Person owner, Long id, Double price, Date end, String categories) {
+    public Article(Person owner, Long id, Double price, Date end, String categories, String desc) {
         this.owner = owner;
         this.id = id;
         this.price = price;
         this.end = end;
         this.categories = fromCSV(categories);
+        this.description = desc;
     }
 
     public Person getOwner() {
@@ -59,6 +61,14 @@ public class Article implements Serializable {
 
     public void setCategories(List<String> categories) {
         this.categories = categories;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public void setDescription(String desc){
+        this.description = desc;
     }
 
     public String getCategoriesAsCSV(){
