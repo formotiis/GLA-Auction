@@ -1,6 +1,5 @@
 package persistence;
 
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
@@ -9,17 +8,15 @@ import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 
-@Stateless(name="ArticleManager")
+@Stateless(name = "ArticleManager")
 @LocalBean
-public class ArticleManagerBean implements ArticleManager {
+public class ArticleManagerBean implements ArticleManager{
 
     @Resource(lookup = "jdbc/auctions")
     private DataSource dataSource;
     private Connection connection;
-    public ArticleManagerBean() {
-    }
 
     @PostConstruct
     public void initialize() {
@@ -39,15 +36,53 @@ public class ArticleManagerBean implements ArticleManager {
             sqle.printStackTrace(); }
     }
 
+    // TODO: Implements all Methods below
+
+    /**
+     * Ajoute l'article à la bdd
+     * @param article à ajouter
+     * @return ?
+     */
     @Override
-    public String addArticle(Article a){
-        try{
-            Statement statement = connection.createStatement();
-            StringBuilder sb = new StringBuilder();
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-        }
+    public String addNew(Article article) {
+        return null;
+    }
+
+    /**
+     *
+     * @param id de l'article
+     * @return L'article
+     */
+    @Override
+    public Article getById(int id) {
+        return null;
+    }
+
+    /**
+     *
+     * @param id designe un utilisateur
+     * @return Articles appartenant à l'utilisateur
+     */
+    @Override
+    public List<Article> getUserListArticles(Long id) {
+        return null;
+    }
+
+    /**
+     *
+     * @return Tous les articles
+     */
+    @Override
+    public List<Article> getAllArticles() {
+        return null;
+    }
+
+    /**
+     * Get all available articles
+     * @return Articles encore à la vente
+     */
+    @Override
+    public List<Article> getAllAvailableArticles() {
         return null;
     }
 }
