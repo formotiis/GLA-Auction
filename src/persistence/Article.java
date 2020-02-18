@@ -8,15 +8,26 @@ import java.util.List;
 public class Article implements Serializable {
 
     private Person owner;
+    private String name;
     private Long id;
     private Double price;
     private Date end;
     List<String> categories;
     private String description;
 
-    public Article(Person owner, Long id, Double price, Date end, String categories, String desc) {
+    public Article(Person owner, String name, Long id, Double price, Date end, String categories, String desc) {
         this.owner = owner;
+        this.name = name;
         this.id = id;
+        this.price = price;
+        this.end = end;
+        this.categories = fromCSV(categories);
+        this.description = desc;
+    }
+
+    public Article(Person owner, String name, Double price, Date end, String categories, String desc) {
+        this.owner = owner;
+        this.name = name;
         this.price = price;
         this.end = end;
         this.categories = fromCSV(categories);
@@ -29,6 +40,14 @@ public class Article implements Serializable {
 
     public void setOwner(Person owner) {
         this.owner = owner;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getId() {
