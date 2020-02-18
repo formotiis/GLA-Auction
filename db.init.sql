@@ -57,3 +57,10 @@ INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
 VALUES (1, 1, 'Projet de GLA',
         'Un projet de master informatique pour une matière appelée génie logiciel avancé à vendre ;)',
         300.5, 'Service,Informatique,Antiquité,Technologie', '2020-02-28');
+
+DELIMITER //
+CREATE PROCEDURE availableArticles()
+    BEGIN
+        SELECT * FROM ARTICLES WHERE CURRENT_DATE<TIME;
+    END//
+DELIMITER ;
