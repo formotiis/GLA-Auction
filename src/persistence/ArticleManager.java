@@ -11,5 +11,7 @@ public interface ArticleManager extends Serializable {
     List<Article> getUserListArticles(Long id); // Articles appartenant à un utilisateur
     List<Article> getAllArticles(); // Tous les articles
     List<Article> getAllAvailableArticles(); // Articles encore à la vente
+    List<Article> getArticlesByName(String name);
+    List<Article> getArticlesByCategory(String category);
 
 }
