@@ -16,4 +16,8 @@ public class ArticleBean implements Serializable {
     public ArticleBean(){
 
     }
+
+    public String goBack(){
+        return "index";
+    }
 }

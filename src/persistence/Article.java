@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Article implements Serializable {
 
+    ArticleManager articleManager;
+
     private Person owner;
     private String name;
     private Long id;
@@ -107,5 +109,11 @@ public class Article implements Serializable {
             }
         }
         return list;
+    }
+
+    public String addArticle(){
+        Article a = new Article(owner, name, price, end, categories.toString(), description);
+        articleManager.addNew(a);
+        return "article ajouté";
     }
 }

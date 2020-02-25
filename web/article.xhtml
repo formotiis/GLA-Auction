@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<head>
+    <title>Sell an article</title>
+</head>
+<h:body>
+    <h:form class="form-group" styleClass="p-4">
+    <div class="form-row">
+    <div class="form-group col-md-6">
+        <label for="nameInput">Name</label>
+        <h:inputText type="text" class="form-control" id="nameInput" value="#{articleBean.name}"/>
+    </div>
+
+        <div class="form-group col-md-6">
+            <label for="priceInput">Price</label>
+            <h:inputText type="text" class="form-control" id="priceInput" value="#{articleBean.price}"/>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="enddateInput">End date</label>
+            <h:inputText type="date" class="form-control" id="enddateInput" value="#{articleBean.end}"/>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="descriptionInput">Description</label>
+            <h:inputText type="text" class="form-control" id="descriptionInput" value="#{articleBean.description}"/>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="categoriesInput">Name</label>
+            <h:inputText type="text" class="form-control" id="categoriesInput" value="#{articleBean.categories}"/>
+        </div>
+    </div>
+
+        <h:commandLink action="#{articleBean.addArticle}">
+            <button type="button" class="btn btn-success mr-2">Submit</button></h:commandLink>
+        <h:commandLink action="#{articleBean.goBack}"><button type="button" class="btn btn-danger">Cancel</button>
+        </h:commandLink>
+
+    </h:form>
+</h:body>
+</html>
