@@ -13,55 +13,32 @@
     <h:form class="form-group" styleClass="p-4">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="firstnameInput">Article</label>
-                <h:inputText type="text" class="form-control" id="firstnameInput" value="#{registrationBean.firstname}"/>
+                <label for="nameInput">Name</label>
+                <h:inputText type="text" class="form-control" id="nameInput" value="#{articleBean.name}"/>
             </div>
             <div class="form-group col-md-6">
-                <label for="lastnameInput">Last Name</label>
-                <h:inputText type="text" class="form-control" id="lastnameInput" value="#{registrationBean.lastname}"/>
+                <label for="priceInput">Price</label>
+                <h:inputText type="text" class="form-control" id="priceInput" value="#{articleBean.price}"/>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="usernameInput">Username</label>
-                <h:inputText type="email" class="form-control" id="usernameInput" value="#{registrationBean.username}"/>
+                <label for="endInput">End date </label>
+                <h:inputText type="date" class="form-control" id="endInput" value="#{articleBean.end}"/>
             </div>
             <div class="form-group col-md-6">
-                <label for="inputPassword4">Password</label>
-                <h:inputSecret type="password" class="form-control" id="inputPassword4" value="#{registrationBean.password}"/>
+                <label for="descriptionInput">Description</label>
+                <h:inputText type="text" class="form-control" id="descriptionInput" value="#{articleBean.description}"/>
             </div>
         </div>
         <div class="form-group">
-            <label for="emailInput">Email</label>
-            <h:inputText type="text" class="form-control" id="emailInput" placeholder="exemple@domain.uk" value="#{registrationBean.email}"/>
+            <label for="categoriesInput">Categories</label>
+            <h:inputText type="text" class="form-control" id="categoriesInput" placeholder="exemple@domain.uk" value="#{articleBean.categories}"/>
         </div>
-        <div class="form-group">
-            <label for="addressInput">Address</label>
-            <h:inputText type="text" class="form-control" id="addressInput" value="#{registrationBean.address}"/>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="cityInput">City</label>
-                <h:inputText type="text" class="form-control" id="cityInput" value="#{registrationBean.city}"/>
-            </div>
-            <div class="form-group col-md-2">
-                <label for="zipInput">Zip</label>
-                <h:inputText type="text" class="form-control" id="zipInput" value="#{registrationBean.zip}"/>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="phoneInput">Phone</label>
-                <h:inputText type="text" class="form-control" id="phoneInput" value="#{registrationBean.phone}"/>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="cardInput">Credit Card Number</label>
-                <h:inputText type="text" class="form-control" id="cardInput" value="#{registrationBean.card}"/>
-            </div>
-        </div>
-        <h:commandLink action="#{registrationBean.registerUser}">
-            <button type="button" class="btn btn-success mr-2">Submit</button></h:commandLink>
-        <h:commandLink action="#{registrationBean.goBack}"><button type="button" class="btn btn-danger">Cancel</button>
+
+        <h:commandLink action="#{articleBean.addArticle}">
+            <button type="button" class="btn btn-success mr-2">Add</button></h:commandLink>
+        <h:commandLink action="#{articleBean.goBack}"><button type="button" class="btn btn-danger">Cancel</button>
         </h:commandLink>
     </h:form>
 </h:body>
