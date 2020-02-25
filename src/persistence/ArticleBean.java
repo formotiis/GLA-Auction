@@ -1,11 +1,13 @@
 package persistence;
 
 
+import navigation.Router;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 @ManagedBean(name="articleBean")
@@ -15,14 +17,6 @@ public class ArticleBean implements Serializable {
     @Inject
     ArticleManager articleManager;
 
-    private Person owner;
-    private String name;
-    private Long id;
-    private Double price;
-    private Date end;
-    List<String> categories;
-    private String description;
-
     public ArticleBean(){
 
     }
@@ -31,14 +25,11 @@ public class ArticleBean implements Serializable {
         return articleManager.getAllAvailableArticles();
     }
 
-    public String goBack(){
-        return "index";
+    public Article getById(Long id){
+        return articleManager.getById(id);
     }
 
-
-    public String addArticle(){
-        Article a = new Article(owner, name, price, end, categories.toString(), description);
-        articleManager.addNew(a);
-        return "article ajouté";
+    public List<Article> getOwn(Long id){
+        return articleManager.getUserListArticles(id);
     }
 }
