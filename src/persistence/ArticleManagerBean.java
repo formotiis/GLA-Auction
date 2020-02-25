@@ -40,8 +40,6 @@ public class ArticleManagerBean implements ArticleManager{
             sqle.printStackTrace(); }
     }
 
-    // TODO: Implements all Methods below
-
     /**
      * Ajoute l'article à la bdd
      * @param article à ajouter
@@ -89,15 +87,16 @@ public class ArticleManagerBean implements ArticleManager{
      * @return L'article
      */
     @Override
-    public Article getById(int id) {
+    public Article getById(Long id) {
         try {
             String query = "SELECT * FROM ARTICLES WHERE ID=?";
             PreparedStatement s = connection.prepareStatement(query);
-            s.setInt(1,id);
+            s.setLong(1,id);
 
             s.execute();
-            s.execute();
-            return getArticle(s.getResultSet());
+            ResultSet rs = s.getResultSet();
+                if(rs.next())
+            return getArticle(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -112,11 +111,9 @@ public class ArticleManagerBean implements ArticleManager{
     @Override
     public List<Article> getUserListArticles(Long id) {
         try {
-            String query = "SELECT * FROM ARTICLES WHERE USER=?";
+            String query = "SELECT * FROM ARTICLES WHERE OWNER=?";
             PreparedStatement s = connection.prepareStatement(query);
-            s.setInt(1,id.intValue());
-
-            s.execute();
+            s.setLong(1,id);
             s.execute();
             ResultSet rs = s.getResultSet();
             List<Article> articleList = new ArrayList<Article>();
@@ -141,7 +138,6 @@ public class ArticleManagerBean implements ArticleManager{
             String query = "SELECT * FROM ARTICLES";
             PreparedStatement s = connection.prepareStatement(query);
 
-            s.execute();
             s.execute();
             ResultSet rs = s.getResultSet();
             List<Article> articleList = new ArrayList<Article>();
@@ -169,7 +165,6 @@ public class ArticleManagerBean implements ArticleManager{
             PreparedStatement s = connection.prepareStatement(query);
             //s.setDate(7, java.sql.Date.valueOf(date));
             s.execute();
-            s.execute();
             ResultSet rs = s.getResultSet();
             List<Article> articleList = new ArrayList<Article>();
             while (rs.next()){
@@ -185,8 +180,9 @@ public class ArticleManagerBean implements ArticleManager{
 
     public Article getArticle(ResultSet rs) throws SQLException {
         Article a = new Article (
-                personManager.getUserByID(rs.getInt(2)),
+                personManager.getUserByID(rs.getLong(2)),
                 rs.getString(3),
+                rs.getLong(1),
                 rs.getDouble(5),
                 rs.getDate(7),
                 rs.getString(6),

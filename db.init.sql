@@ -57,6 +57,10 @@ INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
 VALUES (1, 1, 'Projet de GLA',
         'Un projet de master informatique pour une matière appelée génie logiciel avancé à vendre ;)',
         300.5, 'Service,Informatique,Antiquité,Technologie', '2020-02-28');
+INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
+VALUES (2, 1, 'Test',
+        'Test',
+        255.5, 'Service,Informatique,Tests', '2020-02-28');
 
 DELIMITER //
 CREATE PROCEDURE availableArticles()

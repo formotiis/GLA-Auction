@@ -95,11 +95,11 @@ public class PersonManagerBean implements PersonManager {
     }
 
     @Override
-    public Person getUserByID(int id) {
+    public Person getUserByID(Long id) {
         try {
             String query = "SELECT * FROM USERS WHERE ID=?";
             PreparedStatement s = connection.prepareStatement(query);
-            s.setInt(1,id);
+            s.setLong(1,id);
             s.execute();
             return getPerson(s.getResultSet());
         } catch (SQLException e) {

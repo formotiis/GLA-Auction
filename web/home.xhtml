@@ -11,37 +11,83 @@
 <link rel="stylesheet" href='#{router.navigateByUrl("bootstrap.min.css")}'/>
 <h:body>
     <f:view>
-        <h:outputLabel value="Hello, #{activeUser.getActiveUser().getFullName()}"/>
+        <h:outputText value="Hello, #{activeUser.getActiveUser().getFullName()}"/>
     </f:view>
+    <br/>
+    <a href='#{router.navigateByUrl("sell.xhtml")}'><button type="button" class="btn btn-outline-info float-right mr-4">
+        Sell a new article </button>
+    </a>
+    <br/>
+    <div class="card m-4">
+        <div class="card-header">
+            Articles Currently being Sold
+        </div>
+        <div class="card-body">
+            <h:dataTable value="#{articleBean.getAvailable()}" var="a"
+                         styleClass="table thead-dark table-striped" >
+                <h:column>
+                    <!-- column header -->
+                    <f:facet name="header">Retailer</f:facet>
+                    <!-- row record -->
+                    #{a.owner.lastName}
+                </h:column>
 
-    <a href='#{router.navigateByUrl("sell.xhtml")}'><button type="button" class="btn btn-info"> Sell a new article </button></a>
+                <h:column>
+                    <f:facet name="header">Product Name</f:facet>
+                    <h:link outcome="article" includeViewParams="true" value="#{a.name}" >
+                        <f:param name="id" value="#{a.id}" />
+                    </h:link>
 
-    <h:dataTable value="#{articleBean.getAvailable()}" var="a"
-                 styleClass="table thead-dark table-striped p-4"
-    >
-        <h:column>
-            <!-- column header -->
-            <f:facet name="header">Retailer</f:facet>
-            <!-- row record -->
-            #{a.owner.lastName}
-        </h:column>
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Product Name</f:facet>
-            #{a.name}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    #{a.price}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Price</f:facet>
-            #{a.price}
-        </h:column>
+                <!--<h:column>
+                    <f:facet name="header">Quantity</f:facet>
+                    #{o.qty}
+                </h:column>-->
 
-        <!--<h:column>
-            <f:facet name="header">Quantity</f:facet>
-            #{o.qty}
-        </h:column>-->
+            </h:dataTable>
+        </div>
+    </div>
 
+    <div class="card m-4">
+        <div class="card-header">
+            Articles <b>you</b>, #{activeUser.activeUser.fullName} are selling
+        </div>
+        <div class="card-body">
+            <h:dataTable value="#{articleBean.getOwn(activeUser.activeUser.id)}" var="b"
+                         styleClass="table thead-dark table-striped" >
+                <h:column>
+                    <!-- column header -->
+                    <f:facet name="header">Retailer</f:facet>
+                    <!-- row record -->
+                    #{b.owner.lastName}
+                </h:column>
 
-    </h:dataTable>
+                <h:column>
+                    <f:facet name="header">Product Name</f:facet>
+                    <h:link outcome="article" includeViewParams="true" value="#{b.name}" >
+                        <f:param name="id" value="#{b.id}" />
+                    </h:link>
+
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    #{b.price}
+                </h:column>
+
+                <!--<h:column>
+                    <f:facet name="header">Quantity</f:facet>
+                    #{o.qty}
+                </h:column>-->
+
+            </h:dataTable>
+        </div>
+    </div>
 </h:body>
 </html>
