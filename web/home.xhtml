@@ -5,10 +5,43 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, #{activeUser.getActiveUser().getFullName()}"/>
+<h:head>
+    <title>Velkome Page</title>
+</h:head>
+<link rel="stylesheet" href='#{router.navigateByUrl("bootstrap.min.css")}'/>
+<h:body>
+    <f:view>
+        <h:outputLabel value="Hello, #{activeUser.getActiveUser().getFullName()}"/>
+    </f:view>
 
-    <h:commandLink action='#{router.navigateByUrl("article.xhtml")}'><button type="button" class="btn btn-outline-info">Add an article</button>
-    </h:commandLink>
-</f:view>
+    <a href='#{router.navigateByUrl("sell.xhtml")}'><button type="button" class="btn btn-info"> Sell a new article </button></a>
+
+    <h:dataTable value="#{articleBean.getAvailable()}" var="a"
+                 styleClass="table thead-dark table-striped p-4"
+    >
+        <h:column>
+            <!-- column header -->
+            <f:facet name="header">Retailer</f:facet>
+            <!-- row record -->
+            #{a.owner.lastName}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Product Name</f:facet>
+            #{a.name}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Price</f:facet>
+            #{a.price}
+        </h:column>
+
+        <!--<h:column>
+            <f:facet name="header">Quantity</f:facet>
+            #{o.qty}
+        </h:column>-->
+
+
+    </h:dataTable>
+</h:body>
 </html>
