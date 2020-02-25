@@ -196,4 +196,32 @@ public class Person implements Serializable {
     public boolean isZipSet(){
         return (zip != null);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if((obj == null) || (obj.getClass() != this.getClass())) { return false; }
+        Person guest = (Person) obj;
+
+        return id == guest.id
+                && (firstName == guest.firstName || (firstName != null && firstName.equals(guest.getFirstName())))
+                && (userName == guest.userName || (userName != null && userName.equals(guest.getUserName())))
+                && (lastName == guest.lastName || (lastName != null && lastName .equals(guest.getLastName())));
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", card='" + card + '\'' +
+                ", id=" + id +
+                ", canceled=" + canceled +
+                ", zip=" + zip +
+                '}';
+    }
 }
