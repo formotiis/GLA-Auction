@@ -178,6 +178,46 @@ public class ArticleManagerBean implements ArticleManager{
         return null;
     }
 
+    @Override
+    public List<Article> getArticlesByName(String name) {
+        try {
+            String query = "CALL availableArticlesByName(?)";
+            PreparedStatement s = connection.prepareStatement(query);
+            s.setString(1, name);
+            s.execute();
+            ResultSet rs = s.getResultSet();
+            List<Article> articleList = new ArrayList<Article>();
+            while (rs.next()){
+                Article a = getArticle(rs);
+                articleList.add(a);
+            }
+            return articleList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Article> getArticlesByCategory(String category) {
+        try {
+            String query = "CALL availableArticlesByCategory(?)";
+            PreparedStatement s = connection.prepareStatement(query);
+            s.setString(1, "%"+category+"%");
+            s.execute();
+            ResultSet rs = s.getResultSet();
+            List<Article> articleList = new ArrayList<Article>();
+            while (rs.next()){
+                Article a = getArticle(rs);
+                articleList.add(a);
+            }
+            return articleList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Article getArticle(ResultSet rs) throws SQLException {
         Article a = new Article (
                 personManager.getUserByID(rs.getLong(2)),
