@@ -5,6 +5,7 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.*;
@@ -18,6 +19,7 @@ public class ArticleManagerBean implements ArticleManager{
     @Resource(lookup = "jdbc/auctions")
     private DataSource dataSource;
     private Connection connection;
+    @Inject
     private PersonManager personManager;
 
     @PostConstruct
@@ -163,9 +165,9 @@ public class ArticleManagerBean implements ArticleManager{
         try {
             Date d = new Date();
             String date = d.toString();
-            String query = "SELECT * FROM ARTICLES WHERE TIME > ?";
+            String query = "CALL  availableArticles()";
             PreparedStatement s = connection.prepareStatement(query);
-            s.setDate(7, java.sql.Date.valueOf(date));
+            //s.setDate(7, java.sql.Date.valueOf(date));
             s.execute();
             s.execute();
             ResultSet rs = s.getResultSet();

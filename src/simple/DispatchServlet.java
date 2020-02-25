@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import firststeps.ComplimentBean;
+//import firststeps.ComplimentBean;
 
 /**
  *
@@ -23,8 +23,8 @@ public class DispatchServlet extends HttpServlet {
 
     @Inject 
     Greeting greet;
-    @Inject
-    ComplimentBean compliment;
+    //@Inject
+    //ComplimentBean compliment;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,8 +42,8 @@ public class DispatchServlet extends HttpServlet {
         String userPath = request.getServletPath();
 
         String name = (String) request.getParameter("name");
-        //String helloMessage = greet.greet(name);
-        String helloMessage = compliment.compliment(name);
+        String helloMessage = greet.greet(name);
+        //String helloMessage = compliment.compliment(name);
 
         out.println("<html>");
         out.println("<head>");

@@ -5,7 +5,7 @@
  */
 package simple;
 
-import firststeps.ComplimentBean;
+//import firststeps.ComplimentBean;
 
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -21,8 +21,8 @@ public class Hello {
 
     @Inject 
     Greeting greet;
-    @Inject
-    ComplimentBean compliment;
+    //@Inject
+    //ComplimentBean compliment;
 
     private String name;
    
@@ -46,9 +46,9 @@ public class Hello {
         return greet.greet(name);  
     }
 
-    public String complimentThem(){
+    /*public String complimentThem(){
         return compliment.compliment(name);
-    }
+    }*/
     public String compliment(){
         return "compliment";
     }

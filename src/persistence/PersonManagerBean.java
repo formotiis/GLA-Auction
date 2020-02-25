@@ -100,8 +100,6 @@ public class PersonManagerBean implements PersonManager {
             String query = "SELECT * FROM USERS WHERE ID=?";
             PreparedStatement s = connection.prepareStatement(query);
             s.setInt(1,id);
-
-            s.execute();
             s.execute();
             return getPerson(s.getResultSet());
         } catch (SQLException e) {
