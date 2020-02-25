@@ -43,4 +43,9 @@ public class ArticleViewerBean implements Serializable {
         id = Long.parseLong(exctx.getRequestParameterMap().get("id"));
         this.article = this.articleManager.getById(this.id);
     }
+
+    public String deleteRedirect(){
+
+        return null;
+    }
 }

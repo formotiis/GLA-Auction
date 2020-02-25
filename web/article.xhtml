@@ -14,13 +14,16 @@
         The article entry you requested does not exist.
     </c:if>
     <c:if test="#{not(articleViewer.article eq null)}">
-        <div class="card text-center border-success">
+        <div class="card text-center border-success m-4">
             <div class="card-header card-title">
-                #{articleViewer.article.name}
+                <h5 class="card-title"> #{articleViewer.article.name}</h5>
             </div>
             <div class="card-body">
                 <div class="card-text">#{articleViewer.article.description}</div>
-                <div class="card-text">Price: #{articleViewer.article.price} Owner: #{articleViewer.article.owner.fullName}
+                <div class="card-text">First Price: #{articleViewer.article.price} Owner: #{articleViewer.article.owner.fullName}
+                </div>
+                <div class="">
+                    Latest bid:
                 </div>
             </div>
             <div class="card-footer text-muted">
@@ -29,10 +32,12 @@
         </div>
     </c:if>
     <!-- TODO: Implement below -->
-    <c:if test="#{(activeUser eq articleViewer.article.owner)}">
+    <c:if test="#{(activeUser.activeUser eq articleViewer.article.owner)}">
         Display bidding history
+        <h:button outcome="#{articleBean.delete(articleViewer.id)}" styleClass="btn ml-3 btn-danger mr-2" value="Delete">
+        </h:button>
     </c:if>
-    <c:if test="#{not(activeUser eq articleViewer.article.owner)}">
+    <c:if test="#{not(activeUser.activeUser eq articleViewer.article.owner)}">
         Display bidding button
     </c:if>
 

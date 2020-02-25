@@ -179,6 +179,22 @@ public class ArticleManagerBean implements ArticleManager{
     }
 
     @Override
+    public String delete(Long id) {
+        try {
+            Statement statement = connection.createStatement();
+            String query = "DELETE FROM ARTICLES WHERE ID=?";
+            PreparedStatement s = connection.prepareStatement(query);
+            s.setLong(1,id);
+            s.execute();
+            return "success";
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public List<Article> getArticlesByName(String name) {
         try {
             String query = "CALL availableArticlesByName(?)";
