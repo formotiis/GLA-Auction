@@ -121,9 +121,6 @@ public class BidManagerBean implements BidManager {
         return null;
     }
 
-    /**
-     * Ajouter incrémentation du compteur de suppression sur la personne
-     */
     @Override
     public String deleteBid(Long id) {
         try {
@@ -149,6 +146,23 @@ public class BidManagerBean implements BidManager {
             String query = "SELECT * FROM BIDDING WHERE BID = (SELECT MAX(BID) FROM BIDDING WHERE ITEM = ?)";
             PreparedStatement s = connection.prepareStatement(query);
             s.setLong(1,id);
+            s.execute();
+            ResultSet rs = s.getResultSet();
+            if(rs.next())
+                return getBid(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Bid getArticleHighestBidByOwner(Long itemId, Long ownerId) {
+        try {
+            String query = "SELECT * FROM BIDDING WHERE BID = (SELECT MAX(BID) FROM BIDDING WHERE ITEM = ? AND BIDDER = ?)";
+            PreparedStatement s = connection.prepareStatement(query);
+            s.setLong(1, itemId);
+            s.setLong(2, ownerId);
             s.execute();
             ResultSet rs = s.getResultSet();
             if(rs.next())
