@@ -1,18 +1,32 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
     <title>Auction Home</title>
 </h:head>
 <link rel="stylesheet" href='#{router.navigateByUrl("bootstrap.min.css")}'/>
 <h:body>
-    <fieldset class="text-center">
-        <legend >Welcome to the auctions website</legend>
-        <a href='#{router.navigateByUrl("login.xhtml")}'><button type="button" class="btn ml-3 btn-info mr-2"> Login </button></a>
+    <div id="header">
+        <ui:insert name="header" >
+            <ui:include src="header.xhtml" />
+        </ui:insert>
+    </div>
+    <c:if test="#{not activeUser.isLogged()}">
+        <fieldset class="text-center">
+            <legend >Welcome to the auctions website</legend>
+            <h:button styleClass="btn ml-3 btn-info mr-2" outcome="login" value="Login"/>
 
-        <a href='#{router.navigateByUrl("register.xhtml")}'><button type="button" class="btn btn-info mr-3"> Register </button></a>
-    </fieldset>
+            <h:button styleClass="btn btn-info mr-3" outcome="register" value="Register"/>
+        </fieldset>
+    </c:if>
+    <c:if test="#{activeUser.isLogged()}">
+        <div class="text-center">
+        <h:button styleClass="btn btn-primary" outcome="home" value="Home page"/>
+        </div>
+    </c:if>
 </h:body>
 </html>
 

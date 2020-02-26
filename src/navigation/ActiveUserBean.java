@@ -38,6 +38,8 @@ public class ActiveUserBean implements ActiveUser {
         return user!=null;
     }
 
+
+
     @Override
     public void logout() {
         user = null;
@@ -49,6 +51,19 @@ public class ActiveUserBean implements ActiveUser {
             return "faces/home.xhtml";
         else
             return "faces/index.xhtml";
+    }
+
+    @Override
+    public boolean isLogged() {
+        return user!=null;
+    }
+
+    @Override
+    public String homeRedirect() {
+        if (isLogged())
+            return "home";
+        else
+            return "index";
     }
 
     @Override

@@ -66,7 +66,7 @@ public class BidManagerBean implements BidManager {
             s.setInt(1,articleId);
             s.execute();
             ResultSet rs = s.getResultSet();
-            List<Bid> bidList = new ArrayList<Bid>();
+            List<Bid> bidList = new ArrayList<>();
             while (rs.next()){
                 Bid b = getBid(rs);
                 bidList.add(b);
@@ -86,7 +86,7 @@ public class BidManagerBean implements BidManager {
             s.setInt(1,ownerId);
             s.execute();
             ResultSet rs = s.getResultSet();
-            List<Bid> bidList = new ArrayList<Bid>();
+            List<Bid> bidList = new ArrayList<>();
             while (rs.next()){
                 Bid b = getBid(rs);
                 bidList.add(b);
@@ -125,10 +125,30 @@ public class BidManagerBean implements BidManager {
     @Override
     public String deleteBid(int id) {
         try {
+            Bid b = getBidById(id);
+            int itemID = b.getArticleId();
             String query = "DELETE FROM BIDDING WHERE ID = ?";
             PreparedStatement s = connection.prepareStatement(query);
             s.setInt(1,id);
             s.execute();
+            Article a = articleManager.getById((long) itemID);
+            if (a.getEnd().before(new Date(System.currentTimeMillis()))) {
+                personManager.incrementCanceledBid((long) id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Bid getArticleHighestBid(int id) {
+        try {
+            String query = "SELECT * FROM BIDDING WHERE BID = (SELECT MAX(BID) FROM BIDDING WHERE ITEM = ?)";
+            PreparedStatement s = connection.prepareStatement(query);
+            s.setLong(1,id);
+            s.execute();
+            return getBid(s.getResultSet());
         } catch (SQLException e) {
             e.printStackTrace();
         }

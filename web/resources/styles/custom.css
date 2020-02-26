@@ -1,0 +1,27 @@
+.fancy-icon{
+    border: 2px solid;
+    border-color: #8F7514 #C9A932;
+    border-radius: 100%;
+    float: left;
+    height: 45px;
+    margin-right: 10px;
+    width: 45px;
+}
+.username {
+    color: #f1e6d0;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+    text-transform: uppercase;
+}
+.secondary {
+    color: #a09a8e;
+    font-size: 10px;
+    margin-top: -2px;
+    text-transform: uppercase;
+    transition: color 1s cubic-bezier(0.06, 0.81, 0, 0.98);
+}
+.account-info {
+    float: left;
+    margin: 5px 11px -10px 0;
+}

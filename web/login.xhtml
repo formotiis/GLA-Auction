@@ -8,8 +8,12 @@
 <h:head>
     <title>Login Page</title>
 </h:head>
-<link rel="stylesheet" href='#{router.navigateByUrl("bootstrap.min.css")}'/>
 <h:body>
+    <div id="header">
+        <ui:insert name="header" >
+            <ui:include src="header.xhtml" />
+        </ui:insert>
+    </div>
     <h:form class="form-group" styleClass="p-4">
         <div class="form-row">
             <div class="form-group col-md-6">

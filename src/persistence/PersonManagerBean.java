@@ -123,6 +123,19 @@ public class PersonManagerBean implements PersonManager {
         return null;
     }
 
+    @Override
+    public String incrementCanceledBid(Long id) {
+        try {
+            String query = "UPDATE USERS SET CANCELED = CANCELED + 1 WHERE ID = ?";
+            PreparedStatement s = connection.prepareStatement(query);
+            s.setLong(1,id);
+            s.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private Person getPerson(ResultSet rs) throws SQLException {
         if(rs.next()){
             Person p = new Person(
