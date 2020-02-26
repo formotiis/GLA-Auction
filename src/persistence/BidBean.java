@@ -15,7 +15,7 @@ public class BidBean implements Serializable {
     private int id;
     private int ownerId;
     private int itemId;
-    private float bidValue;
+    private Double bidValue;
 
     public BidBean(){
 
@@ -45,11 +45,11 @@ public class BidBean implements Serializable {
         this.itemId = itemId;
     }
 
-    public float getBidValue() {
+    public Double getBidValue() {
         return bidValue;
     }
 
-    public void setBidValue(float bidValue) {
+    public void setBidValue(Double bidValue) {
         this.bidValue = bidValue;
     }
 }
