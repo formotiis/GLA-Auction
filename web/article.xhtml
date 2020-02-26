@@ -75,7 +75,11 @@
         <h:form class="form-group" styleClass="p-4">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <h:inputText type="text" class="form-control" id="bid" value="#{articleViewer.bid}"/>
+                    <h:inputText type="text" class="form-control" id="bid" value="#{articleViewer.bid}">
+                        <f:validator validatorId="persistence.BidValidator">
+                            <f:attribute name="validatorId" value="#{articleViewer.id}"/>
+                        </f:validator>
+                    </h:inputText>
                 </div>
                 <div class="form-group col-md-6">
                     <h:commandButton action="#{BidBean.newBid(activeUser.activeUser.id, articleViewer.id, articleViewer.bid)}" styleClass="btn btn-info" value="BID">
