@@ -6,6 +6,7 @@ import navigation.Router;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Date;
@@ -106,8 +107,9 @@ public class ArticleBean implements Serializable {
         return articleManager.getUserListArticles(id);
     }
 
-    public String delete(Long id){
-        articleManager.delete(id);
+    public String delete(Boolean b,Long id){
+        if(b)
+            articleManager.delete(id);
         return "home";
     }
 }

@@ -66,7 +66,7 @@ public class BidManagerBean implements BidManager {
             s.setInt(1,articleId);
             s.execute();
             ResultSet rs = s.getResultSet();
-            List<Bid> bidList = new ArrayList<Bid>();
+            List<Bid> bidList = new ArrayList<>();
             while (rs.next()){
                 Bid b = getBid(rs);
                 bidList.add(b);
@@ -86,7 +86,7 @@ public class BidManagerBean implements BidManager {
             s.setInt(1,ownerId);
             s.execute();
             ResultSet rs = s.getResultSet();
-            List<Bid> bidList = new ArrayList<Bid>();
+            List<Bid> bidList = new ArrayList<>();
             while (rs.next()){
                 Bid b = getBid(rs);
                 bidList.add(b);

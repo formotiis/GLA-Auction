@@ -12,4 +12,9 @@ public class BidBean implements Serializable {
     @Inject
     BidManager bidManager;
 
+
+    //TODO: Delet dis
+    public void donothing(Double b){
+        System.nanoTime();
+    }
 }
