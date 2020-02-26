@@ -7,11 +7,11 @@ import java.util.List;
 @Local
 public interface BidManager extends Serializable {
 
-    Bid getBidById(int id);
-    List<Bid> getBidsByArticleId(int articleId);
-    List<Bid> getBidsByOwnerId(int ownerId);
+    Bid getBidById(Long id);
+    List<Bid> getBidsByArticleId(Long articleId);
+    List<Bid> getBidsByOwnerId(Long ownerId);
     String addBid(Bid bid);
-    String deleteBid(int id);
-    Bid getArticleHighestBid(int id);
+    String deleteBid(Long id);
+    Bid getArticleHighestBid(Long id);
 
 }

@@ -45,7 +45,7 @@ public class BidManagerBean implements BidManager {
     }
 
     @Override
-    public Bid getBidById(int id) {
+    public Bid getBidById(Long id) {
         try {
             String query = "SELECT * FROM BIDDING WHERE ID=?";
             PreparedStatement s = connection.prepareStatement(query);
@@ -59,16 +59,17 @@ public class BidManagerBean implements BidManager {
     }
 
     @Override
-    public List<Bid> getBidsByArticleId(int articleId) {
+    public List<Bid> getBidsByArticleId(Long articleId) {
         try {
             String query = "SELECT * FROM BIDDING WHERE ITEM = ?";
             PreparedStatement s = connection.prepareStatement(query);
-            s.setInt(1,articleId);
+            s.setLong(1,articleId);
             s.execute();
             ResultSet rs = s.getResultSet();
             List<Bid> bidList = new ArrayList<>();
             while (rs.next()){
                 Bid b = getBid(rs);
+                System.err.println(b);
                 bidList.add(b);
             }
             return bidList;
@@ -79,11 +80,11 @@ public class BidManagerBean implements BidManager {
     }
 
     @Override
-    public List<Bid> getBidsByOwnerId(int ownerId) {
+    public List<Bid> getBidsByOwnerId(Long ownerId) {
         try {
             String query = "SELECT * FROM BIDDING WHERE BIDDER = ?";
             PreparedStatement s = connection.prepareStatement(query);
-            s.setInt(1,ownerId);
+            s.setLong(1,ownerId);
             s.execute();
             ResultSet rs = s.getResultSet();
             List<Bid> bidList = new ArrayList<>();
@@ -104,13 +105,14 @@ public class BidManagerBean implements BidManager {
             Statement statement = connection.createStatement();
             StringBuilder sb = new StringBuilder();
 
-            sb.append("INSERT INTO BIDDING(BIDDER, ITEM, BID VALUES(");
+            sb.append("INSERT INTO BIDDING(BIDDER, ITEM, BID) VALUES(");
             sb.append(bid.getBidderId())
                     .append(",");
             sb.append(bid.getArticleId())
                     .append(",");
             sb.append(bid.getBidValue());
             sb.append(")");
+
             statement.execute(sb.toString());
         }
         catch(SQLException e){
@@ -123,13 +125,13 @@ public class BidManagerBean implements BidManager {
      * Ajouter incrémentation du compteur de suppression sur la personne
      */
     @Override
-    public String deleteBid(int id) {
+    public String deleteBid(Long id) {
         try {
             Bid b = getBidById(id);
-            int itemID = b.getArticleId();
+            Long itemID = b.getArticleId();
             String query = "DELETE FROM BIDDING WHERE ID = ?";
             PreparedStatement s = connection.prepareStatement(query);
-            s.setInt(1,id);
+            s.setLong(1,id);
             s.execute();
             Article a = articleManager.getById((long) itemID);
             if (a.getEnd().before(new Date(System.currentTimeMillis()))) {
@@ -142,13 +144,15 @@ public class BidManagerBean implements BidManager {
     }
 
     @Override
-    public Bid getArticleHighestBid(int id) {
+    public Bid getArticleHighestBid(Long id) {
         try {
             String query = "SELECT * FROM BIDDING WHERE BID = (SELECT MAX(BID) FROM BIDDING WHERE ITEM = ?)";
             PreparedStatement s = connection.prepareStatement(query);
             s.setLong(1,id);
             s.execute();
-            return getBid(s.getResultSet());
+            ResultSet rs = s.getResultSet();
+            if(rs.next())
+                return getBid(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -156,15 +160,11 @@ public class BidManagerBean implements BidManager {
     }
 
     private Bid getBid(ResultSet rs) throws SQLException {
-        if(rs.next()){
-            Bid b = new Bid(
-                    rs.getInt(1),
-                    rs.getInt(2),
-                    rs.getInt(3),
-                    rs.getFloat(4)
+        Bid b = new Bid(rs.getLong(1),
+                rs.getLong(2),
+                rs.getLong(3),
+                rs.getDouble(4)
             );
-            return b;
-        }
-        return null;
+        return b;
     }
 }

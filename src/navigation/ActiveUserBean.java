@@ -41,8 +41,9 @@ public class ActiveUserBean implements ActiveUser {
 
 
     @Override
-    public void logout() {
+    public String logout() {
         user = null;
+        return "index";
     }
 
     @Override

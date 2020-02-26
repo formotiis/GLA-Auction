@@ -4,6 +4,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.List;
 
 @ManagedBean(name="BidBean")
 @SessionScoped
@@ -12,36 +13,36 @@ public class BidBean implements Serializable {
     @Inject
     BidManager bidManager;
 
-    private int id;
-    private int ownerId;
-    private int itemId;
+    private Long id;
+    private Long ownerId;
+    private Long itemId;
     private Double bidValue;
 
     public BidBean(){
 
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getOwnerId() {
+    public Long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(int ownerId) {
+    public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
 
-    public int getItemId() {
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 
@@ -51,5 +52,18 @@ public class BidBean implements Serializable {
 
     public void setBidValue(Double bidValue) {
         this.bidValue = bidValue;
+    }
+    
+    public String newBid(Long oID, Long aID, Double val){
+        bidManager.addBid(new Bid(-1L, oID, aID, val));
+        return "home";
+    }
+
+    public List<Bid> getBidsByArticleId(Long articleId) {
+        return bidManager.getBidsByArticleId(articleId);
+    }
+
+    public Bid getArticleHighestBid(Long id){
+        return bidManager.getArticleHighestBid(id);
     }
 }

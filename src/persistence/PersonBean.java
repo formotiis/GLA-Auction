@@ -20,6 +20,9 @@ public class PersonBean implements Serializable {
 
     }
 
+    public Person getUserByID(Long id){
+        return personManager.getUserByID(id);
+    }
     /*public Person[] getAll(){
         return personManager.allPersons();
     }

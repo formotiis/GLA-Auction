@@ -8,7 +8,7 @@ import javax.ejb.SessionBean;
 public interface ActiveUser extends SessionBean {
     Person getActiveUser();
     boolean login();
-    void logout();
+    String logout();
     String postLoginRedirect();
     boolean isLogged();
     String homeRedirect();

@@ -30,7 +30,7 @@
                 <div class="card-text">First Price: #{articleViewer.article.price} Owner: #{articleViewer.article.owner.fullName}
                 </div>
                 <div class="">
-                    Latest bid:
+                    Latest bid: #{BidBean.getArticleHighestBid(articleViewer.id).bidValue}
                 </div>
             </div>
             <div class="card-footer text-muted">
@@ -40,30 +40,48 @@
     </c:if>
     <!-- TODO: Implement below -->
     <c:if test="#{(activeUser.activeUser eq articleViewer.article.owner)}">
-        Display bidding history
+        <div class="card m-4">
+            <div class="card-header">
+                Articles Currently being Sold
+            </div>
+            <div class="card-body">
+                <!--<c:if test="BidBean.getBidsByArticleId(articleViewer.id).size()>0">-->
+                    <h:dataTable value="#{BidBean.getBidsByArticleId(articleViewer.id)}" var="a"
+                                 styleClass="table thead-dark table-striped" >
+                        <h:column>
+                            <!-- column header -->
+                            <f:facet name="header">Bidder</f:facet>
+                            <!-- row record -->
+                            #{personBean.getUserByID(a.getBidderId()).userName}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Bid</f:facet>
+                            #{a.bidValue}
+                        </h:column>
+
+                    </h:dataTable>
+               <!-- </c:if>-->
+            </div>
+        </div>
         <h:form>
         <h:commandButton action="#{articleBean.delete(articleViewer.deletion,articleViewer.id)}" immediate="true"
-                         actionListener="#{articleViewer.updateData}" styleClass="btn ml-3 btn-danger mr-2" value="Delete">
+                         styleClass="btn ml-3 btn-danger mr-2" value="Delete">
         </h:commandButton>
         </h:form>
     </c:if>
-    <c:if test="#{not(activeUser.activeUser eq articleViewer.article.owner)}">
+    <c:if test="#{activeUser.isLogged() and not(activeUser.activeUser eq articleViewer.article.owner)}">
         Display bidding button
         <h:form class="form-group" styleClass="p-4">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="bid">Bid</label>
                     <h:inputText type="text" class="form-control" id="bid" value="#{articleViewer.bid}"/>
                 </div>
                 <div class="form-group col-md-6">
-                    <h:button outcome="#{BidBean.setBidValue(articleViewer.bid)}" styleClass="btn btn-info" value="BID">
-                    </h:button>
+                    <h:commandButton action="#{BidBean.newBid(activeUser.activeUser.id, articleViewer.id, articleViewer.bid)}" styleClass="btn btn-info" value="BID">
+                    </h:commandButton>
                 </div>
             </div>
-            <h:commandLink action="#{activeUser.postLoginRedirect}">
-                <button type="button" class="btn btn-success mr-2">Login</button></h:commandLink>
-            <h:commandLink action="register"><button type="button" class="btn btn-info">Register</button>
-            </h:commandLink>
         </h:form>
     </c:if>
 
