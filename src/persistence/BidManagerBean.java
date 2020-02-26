@@ -129,6 +129,7 @@ public class BidManagerBean implements BidManager {
             PreparedStatement s = connection.prepareStatement(query);
             s.setInt(1,id);
             s.execute();
+            personManager.incrementCanceledBid((long) id);
         } catch (SQLException e) {
             e.printStackTrace();
         }

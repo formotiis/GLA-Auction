@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.sql.DataSource;
@@ -21,6 +22,8 @@ public class ArticleManagerBean implements ArticleManager{
     private Connection connection;
     @Inject
     private PersonManager personManager;
+
+    private Article specialOffer;
 
     @PostConstruct
     public void initialize() {
@@ -215,6 +218,22 @@ public class ArticleManagerBean implements ArticleManager{
     }
 
     @Override
+    @Schedule(second="0", minute="0", hour="0",
+              dayOfMonth="*", month="*", year="*")
+    public void generateSpecialOffer() {
+        try {
+            String query = "SELECT * FROM ARTICLES ORDER BY RAND() LIMIT 1";
+            PreparedStatement s = connection.prepareStatement(query);
+            s.execute();
+            ResultSet rs = s.getResultSet();
+            if(rs.next())
+               specialOffer = getArticle(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public List<Article> getArticlesByCategory(String category) {
         try {
             String query = "CALL availableArticlesByCategory(?)";
@@ -245,5 +264,9 @@ public class ArticleManagerBean implements ArticleManager{
                 rs.getString(4)
         );
         return a;
+    }
+
+    public Article getSpecialOffer() {
+        return specialOffer;
     }
 }

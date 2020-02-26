@@ -14,5 +14,7 @@ public interface ArticleManager extends Serializable {
     String delete(Long id); // Article a supprimer
     List<Article> getArticlesByCategory(String category);
     List<Article> getArticlesByName(String name);
+    void generateSpecialOffer();
+    Article getSpecialOffer();
 
 }
