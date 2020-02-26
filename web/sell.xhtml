@@ -23,8 +23,9 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="endInput">End date </label>
-                <h:inputText type="date" class="form-control" id="endInput" value="#{articleBean.end}"/>
+                <label for="endInput">End date (format yyyy-mm-dd) </label>
+                <h:inputText type="text" class="form-control" id="endInput" value="#{articleBean.endDate}"/>
+
             </div>
             <div class="form-group col-md-6">
                 <label for="descriptionInput">Description</label>
@@ -32,8 +33,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="categoriesInput">Categories</label>
-            <h:inputText type="text" class="form-control" id="categoriesInput" placeholder="exemple@domain.uk" value="#{articleBean.categories}"/>
+            <label for="categoriesInput">Categories (séparez les mots clés par une virgule)</label>
+            <h:inputText type="text" class="form-control" id="categoriesInput" value="#{articleBean.cat}"/>
         </div>
 
         <h:commandLink action="#{articleBean.addArticle}">

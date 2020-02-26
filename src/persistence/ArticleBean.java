@@ -1,6 +1,7 @@
 package persistence;
 
 
+import navigation.ActiveUser;
 import navigation.Router;
 
 import javax.faces.bean.ManagedBean;
@@ -8,6 +9,10 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -17,17 +22,20 @@ public class ArticleBean implements Serializable {
 
     @Inject
     ArticleManager articleManager;
+    @Inject
+    ActiveUser activeUser;
 
     private Person owner;
     private String name;
     private Long id;
     private Double price;
+    private String endDate;
     private Date end;
     List<String> categories;
+    String cat;
     private String description;
 
     public ArticleBean(){
-
     }
 
     public Person getOwner() {
@@ -66,16 +74,31 @@ public class ArticleBean implements Serializable {
         return end;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
+    public void setEnd(Date end) {this.end = end;}
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public List<String> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
+    public void setCategories(String cat) {
+        String[] splitCat = cat.split(" ");
+        this.categories = Arrays.asList(splitCat);
+    }
+
+    public String getCat() {
+        return cat;
+    }
+
+    public void setCat(String cat) {
+        this.cat = cat;
     }
 
     public String getDescription(){
@@ -109,5 +132,21 @@ public class ArticleBean implements Serializable {
     public String delete(Long id){
         articleManager.delete(id);
         return "home";
+    }
+
+    public String addArticle(){
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        try{
+            end = formatter.parse(endDate);
+            Article a = new Article(activeUser.getActiveUser(), name, price, end, getCategoriesAsCSV(), description);
+            articleManager.addNew(a);
+            return "index";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+
     }
 }
