@@ -11,7 +11,7 @@ public interface BidManager extends Serializable {
     List<Bid> getBidsByArticleId(Long articleId);
     List<Bid> getBidsByOwnerId(Long ownerId);
     String addBid(Bid bid);
-    String deleteBid(Long id);
+    void deleteBid(Long id);
     Bid getArticleHighestBid(Long id);
     Bid getArticleHighestBidByOwner(Long itemId, Long ownerId);
 

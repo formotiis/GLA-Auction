@@ -122,7 +122,7 @@ public class BidManagerBean implements BidManager {
     }
 
     @Override
-    public String deleteBid(Long id) {
+    public void deleteBid(Long id) {
         try {
             Bid b = getBidById(id);
             Long itemID = b.getArticleId();
@@ -130,14 +130,13 @@ public class BidManagerBean implements BidManager {
             PreparedStatement s = connection.prepareStatement(query);
             s.setLong(1,id);
             s.execute();
-            Article a = articleManager.getById((long) itemID);
+            Article a = articleManager.getById(itemID);
             if (a.getEnd().before(new Date(System.currentTimeMillis()))) {
-                personManager.incrementCanceledBid((long) id);
+                personManager.incrementCanceledBid(id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     @Override
@@ -147,9 +146,7 @@ public class BidManagerBean implements BidManager {
             PreparedStatement s = connection.prepareStatement(query);
             s.setLong(1,id);
             s.execute();
-            ResultSet rs = s.getResultSet();
-            if(rs.next())
-                return getBid(rs);
+            return getBid(s.getResultSet());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -164,9 +161,7 @@ public class BidManagerBean implements BidManager {
             s.setLong(1, itemId);
             s.setLong(2, ownerId);
             s.execute();
-            ResultSet rs = s.getResultSet();
-            if(rs.next())
-                return getBid(rs);
+            return getBid(s.getResultSet());
         } catch (SQLException e) {
             e.printStackTrace();
         }
