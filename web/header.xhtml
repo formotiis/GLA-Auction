@@ -8,13 +8,21 @@
 
 <h:body>
     <ui:composition>
-    <link rel="stylesheet" href='#{router.navigateByUrl("bootstrap.min.css")}'/>
+    <link rel="stylesheet" href='#{router.navigateByUrl("resources/styles/bootstrap.min.css")}'/>
+    <link rel="stylesheet" href='#{router.navigateByUrl("resources/styles/custom.css")}'/>
     <div class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
         <h:link outcome="#{activeUser.homeRedirect()}"><h1>Auctions</h1></h:link>
         <c:if test="#{activeUser.isLogged()}">
             <div class="ml-auto">
-                #{activeUser.activeUser.fullName}
+                <div class="">
+                <h:graphicImage value='resources/images/icon.png' styleClass="fancy-icon"/>
+                <div class="account-info">
+                    <div class="username">#{activeUser.activeUser.userName}</div>
+                    <div class="secondary">#{activeUser.activeUser.fullName}</div>
+                </div>
             </div>
+            </div>
+
         </c:if>
     </div>
     </ui:composition>

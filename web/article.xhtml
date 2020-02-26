@@ -8,8 +8,15 @@
 <h:head>
     <title>Aricle - #{articleViewer.article.name}</title>
 </h:head>
-<link rel="stylesheet" href='#{router.navigateByUrl("bootstrap.min.css")}'/>
-<f:view>
+
+<h:body>
+    <div id="header">
+        <ui:insert name="header" >
+            <ui:include src="header.xhtml" />
+        </ui:insert>
+    </div>
+
+    <f:view>
     <c:if test="#{articleViewer.article eq null}">
         The article entry you requested does not exist.
     </c:if>
@@ -61,4 +68,5 @@
     </c:if>
 
 </f:view>
+</h:body>
 </html>

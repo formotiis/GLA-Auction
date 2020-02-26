@@ -8,8 +8,12 @@
 <h:head>
     <title>Welcome Aboard</title>
 </h:head>
-<link rel="stylesheet" href='#{router.navigateByUrl("bootstrap.min.css")}'/>
 <h:body>
+    <div id="header">
+        <ui:insert name="header" >
+            <ui:include src="header.xhtml" />
+        </ui:insert>
+    </div>
     <h:form>
 
         <fieldset>

@@ -8,11 +8,12 @@
 <h:head>
     <title>Velkome Page</title>
 </h:head>
-<link rel="stylesheet" href='#{router.navigateByUrl("bootstrap.min.css")}'/>
 <h:body>
-    <f:view>
-        <h:outputText value="Hello, #{activeUser.getActiveUser().getFullName()}"/>
-    </f:view>
+    <div id="header">
+        <ui:insert name="header" >
+            <ui:include src="header.xhtml" />
+        </ui:insert>
+    </div>
     <br/>
     <a href='#{router.navigateByUrl("sell.xhtml")}'><button type="button" class="btn btn-outline-info float-right mr-4">
         Sell a new article </button>
@@ -29,7 +30,7 @@
                     <!-- column header -->
                     <f:facet name="header">Retailer</f:facet>
                     <!-- row record -->
-                    #{a.owner.lastName}
+                    #{a.owner.userName}
                 </h:column>
 
                 <h:column>

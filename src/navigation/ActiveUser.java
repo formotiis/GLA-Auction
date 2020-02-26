@@ -10,4 +10,6 @@ public interface ActiveUser extends SessionBean {
     boolean login();
     void logout();
     String postLoginRedirect();
+    boolean isLogged();
+    String homeRedirect();
 }
