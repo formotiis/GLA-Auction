@@ -138,7 +138,7 @@ public class ArticleBean implements Serializable {
 
     public String addArticle(){
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         this.setCategories(cat);
         try{
             end = formatter.parse(endDate);
