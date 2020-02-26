@@ -105,4 +105,9 @@ public class ArticleBean implements Serializable {
     public List<Article> getOwn(Long id){
         return articleManager.getUserListArticles(id);
     }
+
+    public String delete(Long id){
+        articleManager.delete(id);
+        return "home";
+    }
 }

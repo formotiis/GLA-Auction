@@ -111,9 +111,26 @@ public class Article implements Serializable {
         return list;
     }
 
-    public String addArticle(){
-        Article a = new Article(owner, name, price, end, categories.toString(), description);
-        articleManager.addNew(a);
-        return "article ajouté";
+    @Override
+    public String toString() {
+        return "Article{" +
+                "owner=" + owner +
+                ", name='" + name + '\'' +
+                ", id=" + id +
+                ", price=" + price +
+                ", end=" + end +
+                ", categories=" + categories +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if((obj == null) || (obj.getClass() != this.getClass())) { return false; }
+        Article guest = (Article) obj;
+        return id == guest.id
+                && (owner == guest.owner || (owner != null && owner.equals(guest.getOwner())))
+                && (name == guest.name || (name != null && name.equals(guest.getName())))
+                && (description == guest.description || (description != null && description .equals(guest.getDescription())));
     }
 }

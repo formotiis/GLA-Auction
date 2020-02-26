@@ -5,16 +5,41 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
-<f:metadata>
-    <!--<f:event type="preRenderView" listener="#{articleViewer.fetchArticle}"/>-->
-    <f:viewParam name="id" value="#{articleViewer.id}"/>
-</f:metadata>
+<h:head>
+    <title>Aricle - #{articleViewer.article.name}</title>
+</h:head>
+<link rel="stylesheet" href='#{router.navigateByUrl("bootstrap.min.css")}'/>
 <f:view>
     <c:if test="#{articleViewer.article eq null}">
         The article entry you requested does not exist.
     </c:if>
     <c:if test="#{not(articleViewer.article eq null)}">
-        <h:outputLabel value="#{articleViewer.article.name}"/>
+        <div class="card text-center border-success m-4">
+            <div class="card-header card-title">
+                <h5 class="card-title"> #{articleViewer.article.name}</h5>
+            </div>
+            <div class="card-body">
+                <div class="card-text">#{articleViewer.article.description}</div>
+                <div class="card-text">First Price: #{articleViewer.article.price} Owner: #{articleViewer.article.owner.fullName}
+                </div>
+                <div class="">
+                    Latest bid:
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                Ends: #{articleViewer.article.end}
+            </div>
+        </div>
     </c:if>
+    <!-- TODO: Implement below -->
+    <c:if test="#{(activeUser.activeUser eq articleViewer.article.owner)}">
+        Display bidding history
+        <h:button outcome="#{articleBean.delete(articleViewer.id)}" styleClass="btn ml-3 btn-danger mr-2" value="Delete">
+        </h:button>
+    </c:if>
+    <c:if test="#{not(activeUser.activeUser eq articleViewer.article.owner)}">
+        Display bidding button
+    </c:if>
+
 </f:view>
 </html>
