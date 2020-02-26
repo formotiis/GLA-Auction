@@ -23,7 +23,7 @@ public class ArticleManagerBean implements ArticleManager{
     @Inject
     private PersonManager personManager;
 
-    private Article specialOffer;
+    private List<Article> specialOffers;
 
     @PostConstruct
     public void initialize() {
@@ -220,14 +220,17 @@ public class ArticleManagerBean implements ArticleManager{
     @Override
     @Schedule(second="0", minute="0", hour="0",
               dayOfMonth="*", month="*", year="*")
-    public void generateSpecialOffer() {
+    public void generateSpecialOffers() {
         try {
-            String query = "SELECT * FROM ARTICLES ORDER BY RAND() LIMIT 1";
+            specialOffers.clear();
+            String query = "SELECT * FROM ARTICLES ORDER BY RAND() LIMIT 3";
             PreparedStatement s = connection.prepareStatement(query);
             s.execute();
             ResultSet rs = s.getResultSet();
-            if(rs.next())
-               specialOffer = getArticle(rs);
+            while (rs.next()){
+                Article a = getArticle(rs);
+                specialOffers.add(a);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -266,7 +269,7 @@ public class ArticleManagerBean implements ArticleManager{
         return a;
     }
 
-    public Article getSpecialOffer() {
-        return specialOffer;
+    public List<Article> getSpecialOffers() {
+        return specialOffers;
     }
 }

@@ -125,11 +125,30 @@ public class BidManagerBean implements BidManager {
     @Override
     public String deleteBid(int id) {
         try {
+            Bid b = getBidById(id);
+            int itemID = b.getArticleId();
             String query = "DELETE FROM BIDDING WHERE ID = ?";
             PreparedStatement s = connection.prepareStatement(query);
             s.setInt(1,id);
             s.execute();
-            personManager.incrementCanceledBid((long) id);
+            Article a = articleManager.getById((long) itemID);
+            if (a.getEnd().before(new Date(System.currentTimeMillis()))) {
+                personManager.incrementCanceledBid((long) id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Bid getArticleHighestBid(int id) {
+        try {
+            String query = "SELECT * FROM BIDDING WHERE BID = (SELECT MAX(BID) FROM BIDDING WHERE ITEM = ?)";
+            PreparedStatement s = connection.prepareStatement(query);
+            s.setLong(1,id);
+            s.execute();
+            return getBid(s.getResultSet());
         } catch (SQLException e) {
             e.printStackTrace();
         }
