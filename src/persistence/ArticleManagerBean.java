@@ -9,6 +9,11 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.Date;
 
@@ -54,13 +59,19 @@ public class ArticleManagerBean implements ArticleManager{
             Statement statement = connection.createStatement();
             StringBuilder sb = new StringBuilder();
 
+            Instant instant = article.getEnd().toInstant();
+            ZoneId zone = ZoneId.of("Europe/Paris");
+            ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zone);
+            LocalDate localDate = zdt.toLocalDate();
+
+
             sb.append("INSERT INTO ARTICLES(OWNER, NAME, ");
 
             if(article.getDescription() != null)
                 sb.append("DESCRIPTION, ");
 
             sb.append("MINPRICE, CATEGORIES, TIME) VALUES(" + "\'");
-            sb.append(article.getOwner())
+            sb.append(article.getOwner().getId())
                     .append("\',\'")
                     .append(article.getName())
                     .append("\',\'");
@@ -74,7 +85,7 @@ public class ArticleManagerBean implements ArticleManager{
                     .append("\',\'")
                     .append(article.getCategories())
                     .append("\',\'")
-                    .append(article.getEnd()).append('\'');
+                    .append(localDate).append('\'');
             sb.append(")");
             statement.execute(sb.toString());
         }

@@ -90,7 +90,7 @@ public class ArticleBean implements Serializable {
     }
 
     public void setCategories(String cat) {
-        String[] splitCat = cat.split(" ");
+        String[] splitCat = cat.split(",");
         this.categories = Arrays.asList(splitCat);
     }
 
@@ -139,6 +139,7 @@ public class ArticleBean implements Serializable {
     public String addArticle(){
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        this.setCategories(cat);
         try{
             end = formatter.parse(endDate);
             Article a = new Article(activeUser.getActiveUser(), name, price, end, getCategoriesAsCSV(), description);
