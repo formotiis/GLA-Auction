@@ -33,6 +33,7 @@ public class ArticleBean implements Serializable {
     private String endDate;
     private Date end;
     List<String> categories;
+    List<Article> filtered;
     String cat;
     private String description;
 
@@ -92,6 +93,14 @@ public class ArticleBean implements Serializable {
     public void setCategories(String cat) {
         String[] splitCat = cat.split(",");
         this.categories = Arrays.asList(splitCat);
+    }
+
+    public List<Article> getFiltered() {
+        return filtered;
+    }
+
+    public void setFiltered(List<Article> filtered) {
+        this.filtered = filtered;
     }
 
     public String getCat() {

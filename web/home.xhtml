@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
     <title>Velkome Page</title>
 </h:head>
@@ -21,7 +21,15 @@
     <br/>
     <div class="card m-4">
         <div class="card-header">
-            Articles Currently being Sold
+            <div class="float-left">
+                Articles Currently being Sold
+            </div>
+            <div class="float-right">
+                <h:form class="form-inline">
+                    <h:inputText styleClass="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <h:commandButton styleClass="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search"/>
+                </h:form>
+            </div>
         </div>
         <div class="card-body">
             <h:dataTable value="#{articleBean.getAvailable()}" var="a"
@@ -42,8 +50,14 @@
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Price</f:facet>
+                    <f:facet name="header">Start Price</f:facet>
                     #{a.price}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Biggest Bid</f:facet>
+                    #{BidBean.getArticleHighestBid(a.id).bidValue}
+
                 </h:column>
 
                 <h:column>
@@ -80,6 +94,11 @@
                 <h:column>
                     <f:facet name="header">Price</f:facet>
                     #{b.price}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Biggest Bid</f:facet>
+                    #{BidBean.getArticleHighestBid(b.id).bidValue}
                 </h:column>
 
                 <h:column>
