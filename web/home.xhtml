@@ -25,10 +25,21 @@
                 Articles Currently being Sold
             </div>
             <div class="float-right">
-                <h:form class="form-inline">
-                    <h:inputText styleClass="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                    <h:commandButton styleClass="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search"/>
-                </h:form>
+                <div class="input-group">
+                    <h:form>
+                        <h:inputText type="text" class="form-control" aria-label="Text input with segmented dropdown button"/>
+                        <div class="input-group-append">
+                            <h:commandButton type="button" class="btn btn-outline-secondary">Action</h:commandButton>
+                            <h:commandButton type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </h:commandButton>
+                            <div class="dropdown-menu">
+                                <h:commandLink styleClass="dropdown-item" action="#{activeUser.homeRedirect}" value="Search By Category" />
+                                <h:commandLink styleClass="dropdown-item" action="#{activeUser.postLoginRedirect}" value="Restore default"/>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
             </div>
         </div>
         <div class="card-body">
