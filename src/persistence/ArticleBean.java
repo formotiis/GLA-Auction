@@ -4,6 +4,7 @@ package persistence;
 import navigation.ActiveUser;
 import navigation.Router;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -33,11 +34,16 @@ public class ArticleBean implements Serializable {
     private String endDate;
     private Date end;
     List<String> categories;
-    List<Article> filtered;
+    List<Article> display;
     String cat;
     private String description;
 
     public ArticleBean(){
+    }
+
+    @PostConstruct
+    private void postConstruct(){
+        setDisplay(getAvailable());
     }
 
     public Person getOwner() {
@@ -95,12 +101,12 @@ public class ArticleBean implements Serializable {
         this.categories = Arrays.asList(splitCat);
     }
 
-    public List<Article> getFiltered() {
-        return filtered;
+    public List<Article> getDisplay() {
+        return display;
     }
 
-    public void setFiltered(List<Article> filtered) {
-        this.filtered = filtered;
+    public void setDisplay(List<Article> display) {
+        this.display = display;
     }
 
     public String getCat() {
@@ -160,5 +166,17 @@ public class ArticleBean implements Serializable {
         }
         return null;
 
+    }
+
+    public void updateDisplay(boolean b, String query){
+        if (b) { // b search by category
+            setDisplay(articleManager.getArticlesByCategory(query));
+        } else { // !b search by name
+
+        }
+    }
+
+    public void restoreDefault(){
+        postConstruct();
     }
 }

@@ -51,7 +51,9 @@ public class BidManagerBean implements BidManager {
             PreparedStatement s = connection.prepareStatement(query);
             s.setLong(1,id);
             s.execute();
-            return getBid(s.getResultSet());
+            ResultSet rs = s.getResultSet();
+            if (rs.next())
+                return getBid(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -146,7 +148,9 @@ public class BidManagerBean implements BidManager {
             PreparedStatement s = connection.prepareStatement(query);
             s.setLong(1,id);
             s.execute();
-            return getBid(s.getResultSet());
+            ResultSet rs = s.getResultSet();
+            if (rs.next())
+                return getBid(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -161,7 +165,9 @@ public class BidManagerBean implements BidManager {
             s.setLong(1, itemId);
             s.setLong(2, ownerId);
             s.execute();
-            return getBid(s.getResultSet());
+            ResultSet rs = s.getResultSet();
+            if (rs.next())
+                return getBid(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }

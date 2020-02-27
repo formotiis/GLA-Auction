@@ -27,15 +27,18 @@
             <div class="float-right">
                 <div class="input-group">
                     <h:form>
-                        <h:inputText type="text" class="form-control" aria-label="Text input with segmented dropdown button"/>
-                        <div class="input-group-append">
-                            <h:commandButton type="button" class="btn btn-outline-secondary">Action</h:commandButton>
-                            <h:commandButton type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </h:commandButton>
-                            <div class="dropdown-menu">
-                                <h:commandLink styleClass="dropdown-item" action="#{activeUser.homeRedirect}" value="Search By Category" />
-                                <h:commandLink styleClass="dropdown-item" action="#{activeUser.postLoginRedirect}" value="Restore default"/>
+                        <div class="input-group">
+                            <h:inputText type="text" class="form-control" aria-label="Text input with segmented dropdown button"/>
+                            <div class="input-group-append">
+                                <h:button type="button" styleClass="btn btn-outline-secondary" value="Search"/>
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <h:commandLink class="dropdown-item" action="#" value="Search By Category"/>
+                                    <div role="separator" class="dropdown-divider"></div>
+                                    <h:commandLink class="dropdown-item" action="#" value="Restore Default"/>
+                                </div>
                             </div>
                         </div>
                     </h:form>
@@ -43,7 +46,7 @@
             </div>
         </div>
         <div class="card-body">
-            <h:dataTable value="#{articleBean.getAvailable()}" var="a"
+            <h:dataTable value="#{articleBean.getDisplay()}" var="a"
                          styleClass="table thead-dark table-striped" >
                 <h:column>
                     <!-- column header -->

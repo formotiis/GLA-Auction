@@ -8,8 +8,11 @@
 
 <h:body>
     <ui:composition>
-    <link rel="stylesheet" href='#{router.navigateByUrl("resources/styles/bootstrap.min.css")}'/>
-    <link rel="stylesheet" href='#{router.navigateByUrl("resources/styles/custom.css")}'/>
+        <script type="text/javascript" src='#{router.navigateByUrl("resources/scripts/jquery.min.js")}'></script>
+        <script type="text/javascript" src='#{router.navigateByUrl("resources/scripts/bootstrap.bundle.js")}'></script>
+        <link rel="stylesheet" href='#{router.navigateByUrl("resources/styles/bootstrap.css")}'/>
+        <link rel="stylesheet" href='#{router.navigateByUrl("resources/styles/custom.css")}'/>
+
     <div class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
         <h:link outcome="#{activeUser.homeRedirect()}"><h1>Auctions</h1></h:link>
         <c:if test="#{activeUser.isLogged()}">
