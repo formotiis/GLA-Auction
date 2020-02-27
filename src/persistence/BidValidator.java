@@ -26,11 +26,18 @@ public class BidValidator implements Validator {
         Double val = (Double) value;
         Article a = (Article)component.getAttributes().get("articleA");
         Double highestBid = (Double)component.getAttributes().get("highestBid");
-
-        if(val <=  highestBid || val <= a.getPrice()){
-            FacesMessage msg = new FacesMessage("The value of your bid must be greater than the last bid or the first price", "Value must be greater than the last bid");
+        
+        if(highestBid != null && val <= highestBid){
+            FacesMessage msg = new FacesMessage("The value of your bid must be greater than the last bid");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
+        else if (val <= a.getPrice()){
+            FacesMessage msg = new FacesMessage("The value of your bid must be greater than the first price");
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(msg);
+        }
+
+
     }
 }
