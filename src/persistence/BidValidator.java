@@ -22,12 +22,13 @@ public class BidValidator implements Validator {
     public BidValidator(){}
 
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        Double val = (Double) value;
-        Long id = Long.parseLong((String)component.getAttributes().get("validatorId"));
-        Article a = articleManager.getById(id);
 
-        if(val <= bidManager.getArticleHighestBid(id).getBidValue() || val <= a.getPrice()){
-            FacesMessage msg = new FacesMessage("The value of your bid must be greater than the last bid or the first price");
+        Double val = (Double) value;
+        Article a = (Article)component.getAttributes().get("articleA");
+        Double highestBid = (Double)component.getAttributes().get("highestBid");
+
+        if(val <=  highestBid || val <= a.getPrice()){
+            FacesMessage msg = new FacesMessage("The value of your bid must be greater than the last bid or the first price", "Value must be greater than the last bid");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
