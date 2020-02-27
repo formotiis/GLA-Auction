@@ -29,6 +29,13 @@
                 <div class="card-text">#{articleViewer.article.description}</div>
                 <div class="card-text">First Price: #{articleViewer.article.price} Owner: #{articleViewer.article.owner.fullName}
                 </div>
+                <div class="row">
+                    <c:forEach var="item" items="#{articleViewer.article.categories}">
+                        <div class="alert alert-primary col-auto mr-1" role="alert">
+                            #{item}
+                        </div>
+                    </c:forEach>
+                </div>
                 <div class="">
                     Latest bid: #{BidBean.getArticleHighestBid(articleViewer.id).bidValue}
                     <c:if test="#{BidBean.isTheOwnerOfHighestBit(articleViewer.id, activeUser.activeUser.id)}">
@@ -93,6 +100,19 @@
                     <h:commandButton action="#{BidBean.newBid(activeUser.activeUser.id, articleViewer.id, articleViewer.bid)}" styleClass="btn btn-info" value="BID">
 
                     </h:commandButton>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    Latest bid: #{BidBean.getArticleHighestBidByOwner(articleViewer.id, activeUser.activeUser.id).bidValue}$
+                    <c:if test="#{not (activeUser.activeUser.canceled >= 3) }">
+                        <h:commandButton action="#{BidBean.deleteBid(BidBean.getArticleHighestBidByOwner(articleViewer.id, activeUser.activeUser.id).id)}" styleClass="btn btn-danger" value="Delete Bid">
+                        </h:commandButton>
+                    </c:if>
+                    <c:if test="#{(activeUser.activeUser.canceled >=3) }">
+                        <br/>
+                        <div class="text-danger">Too many bid cancels, can't get out of this one sorry !</div>
+                    </c:if>
                 </div>
             </div>
         </h:form>

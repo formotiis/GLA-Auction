@@ -43,8 +43,7 @@
 
         <h:commandLink action="#{articleBean.addArticle}">
             <button type="button" class="btn btn-success mr-2">Add</button></h:commandLink>
-        <h:commandLink action="#{articleBean.goBack}"><button type="button" class="btn btn-danger">Cancel</button>
-        </h:commandLink>
+        <h:button type="button" class="btn btn-danger" outcome="home" value="Cancel"/>
     </h:form>
 </h:body>
 </html>

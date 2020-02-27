@@ -68,12 +68,20 @@ public class BidBean implements Serializable {
     }
 
     public Boolean isTheOwnerOfHighestBit(Long id, Long ownId){
-        System.out.println(id);
-        System.out.println(ownId);
-        Bid b = getArticleHighestBid(id);
-        if (id!=null&&ownId!=null&&b!=null) {
-            return ownId.equals(b.getBidderId());
+        if(id!=null){
+            Bid b = getArticleHighestBid(id);
+            if (ownId!=null&&b!=null) {
+                return ownId.equals(b.getBidderId());
+            }
         }
         return false;
+    }
+
+    public Bid getArticleHighestBidByOwner(Long itemId, Long ownerId){
+        return bidManager.getArticleHighestBidByOwner(itemId,ownerId);
+    }
+
+    public void deleteBid(Long id){
+        bidManager.deleteBid(id);
     }
 }
