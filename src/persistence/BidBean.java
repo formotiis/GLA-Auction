@@ -76,4 +76,12 @@ public class BidBean implements Serializable {
         }
         return false;
     }
+
+    public Bid getArticleHighestBidByOwner(Long itemId, Long ownerId){
+        return bidManager.getArticleHighestBidByOwner(itemId,ownerId);
+    }
+
+    public void deleteBid(Long id){
+        bidManager.deleteBid(id);
+    }
 }

@@ -169,7 +169,7 @@ public class ArticleBean implements Serializable {
             end = formatter.parse(endDate);
             Article a = new Article(activeUser.getActiveUser(), name, price, end, getCategoriesAsCSV(), description);
             articleManager.addNew(a);
-            return "index";
+            return "home";
         }
         catch(Exception e){
             e.printStackTrace();
