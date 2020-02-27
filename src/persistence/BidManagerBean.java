@@ -8,6 +8,8 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,14 +129,18 @@ public class BidManagerBean implements BidManager {
     public void deleteBid(Long id) {
         try {
             Bid b = getBidById(id);
+            if (b!= null){
             Long itemID = b.getArticleId();
             String query = "DELETE FROM BIDDING WHERE ID = ?";
             PreparedStatement s = connection.prepareStatement(query);
             s.setLong(1,id);
             s.execute();
             Article a = articleManager.getById(itemID);
-            if (a.getEnd().before(new Date(System.currentTimeMillis()))) {
-                personManager.incrementCanceledBid(id);
+            // SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+            if (a.getEnd().before(new Date())) {
+                personManager.incrementCanceledBid(b.getBidderId());
+            }
             }
         } catch (SQLException e) {
             e.printStackTrace();
