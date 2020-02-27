@@ -29,6 +29,13 @@
                 <div class="card-text">#{articleViewer.article.description}</div>
                 <div class="card-text">First Price: #{articleViewer.article.price} Owner: #{articleViewer.article.owner.fullName}
                 </div>
+                <div class="row">
+                    <c:forEach var="item" items="#{articleViewer.article.categories}">
+                        <div class="alert alert-primary col-auto mr-1" role="alert">
+                            #{item}
+                        </div>
+                    </c:forEach>
+                </div>
                 <div class="">
                     Latest bid: #{BidBean.getArticleHighestBid(articleViewer.id).bidValue}
                     <c:if test="#{BidBean.isTheOwnerOfHighestBit(articleViewer.id, activeUser.activeUser.id)}">

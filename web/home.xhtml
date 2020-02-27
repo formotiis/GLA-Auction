@@ -19,7 +19,7 @@
         Sell a new article </button>
     </a>
     <br/>
-    <div class="card m-4">
+    <div class="card m-4 d-flex">
         <div class="card-header">
             <div class="float-left">
                 Articles Currently being Sold
@@ -28,16 +28,17 @@
                 <div class="input-group">
                     <h:form>
                         <div class="input-group">
-                            <h:inputText type="text" class="form-control" aria-label="Text input with segmented dropdown button"/>
+                            <h:inputText type="text" class="form-control" immediate="true" value="#{articleBean.query}"/>
                             <div class="input-group-append">
-                                <h:button type="button" styleClass="btn btn-outline-secondary" value="Search"/>
+
                                 <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <h:commandLink class="dropdown-item" action="#" value="Search By Category"/>
+                                    <h:commandLink class="dropdown-item" action="#{articleBean.updateDisplay(false)}" value="Search By Name"/>
+                                    <h:commandLink class="dropdown-item" action="#{articleBean.updateDisplay(true)}" value="Search By Category"/>
                                     <div role="separator" class="dropdown-divider"></div>
-                                    <h:commandLink class="dropdown-item" action="#" value="Restore Default"/>
+                                    <h:commandLink class="dropdown-item" action="#{articleBean.restoreDefault()}" value="Restore Default"/>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +84,7 @@
         </div>
     </div>
 
-    <div class="card m-4">
+    <div class="card m-4 d-flex">
         <div class="card-header">
             Articles <b>you</b>, #{activeUser.activeUser.fullName} are selling
         </div>

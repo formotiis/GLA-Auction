@@ -7,6 +7,7 @@ import navigation.Router;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
@@ -19,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 @ManagedBean(name="articleBean")
-@SessionScoped
+@RequestScoped
 public class ArticleBean implements Serializable {
 
     @Inject
@@ -37,6 +38,7 @@ public class ArticleBean implements Serializable {
     List<Article> display;
     String cat;
     private String description;
+    private String query;
 
     public ArticleBean(){
     }
@@ -90,6 +92,14 @@ public class ArticleBean implements Serializable {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
     }
 
     public List<String> getCategories() {
@@ -168,15 +178,17 @@ public class ArticleBean implements Serializable {
 
     }
 
-    public void updateDisplay(boolean b, String query){
+    public String updateDisplay(boolean b){
         if (b) { // b search by category
             setDisplay(articleManager.getArticlesByCategory(query));
         } else { // !b search by name
-
+            setDisplay(articleManager.getArticlesByName(query));
         }
+        return "home";
     }
 
-    public void restoreDefault(){
+    public String restoreDefault(){
         postConstruct();
+        return "home";
     }
 }
