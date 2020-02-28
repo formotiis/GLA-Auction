@@ -116,7 +116,6 @@
                 <div class="form-group">
                     <h:form>
                     Latest bid: #{BidBean.getArticleHighestBidByOwner(articleViewer.id, activeUser.activeUser.id).bidValue}$
-                    #{activeUser.activeUser.canceled}
                         <h:commandButton action="#{BidBean.deleteBid(BidBean.getArticleHighestBidByOwner(articleViewer.id, activeUser.activeUser.id).id)}" styleClass="btn btn-danger" value="Delete Bid">
                         </h:commandButton>
                     </h:form>
