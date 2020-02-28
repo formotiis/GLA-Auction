@@ -27,7 +27,7 @@ CREATE TABLE USERS (
 CREATE TABLE ARTICLES (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     OWNER INT NOT NULL,
-    NAME VARCHAR(20) NOT NULL,
+    NAME VARCHAR(100) NOT NULL,
     DESCRIPTION VARCHAR(100),
     MINPRICE FLOAT NOT NULL, /* Prix de vente pre-encheres */
     CATEGORIES VARCHAR(100) NOT NULL,
@@ -53,17 +53,77 @@ CREATE TABLE BIDDING (
 
 INSERT INTO USERS (LOGIN, PASSWORD, FIRSTNAME, LASTNAME, PHONE, EMAIL, ADDRESS, CITY, ZIP, CARD) VALUES 
 ('admin', 'admin', 'Administrator', 'Ofthewebsite', '+33133831132', 'admin@projet.gla', '113 Av. Administration', 'Nancy', 54000, '1234567890123456');
+INSERT INTO USERS (LOGIN, PASSWORD, FIRSTNAME, LASTNAME, PHONE, EMAIL, ADDRESS, CITY, ZIP, CARD) VALUES
+('BrLoss', '123', 'Brice', 'Losson', '+33133831132', 'brice.losson@projet.gla', '113 Av. Administration', 'Nancy', 54000, '1234567890123456');
+INSERT INTO USERS (LOGIN, PASSWORD, FIRSTNAME, LASTNAME, PHONE, EMAIL, ADDRESS, CITY, ZIP, CARD) VALUES
+('ChLan', '123', 'Charlotte', 'Lanuel', '+33133831132', 'charlotte.lanuel@projet.gla', '113 Av. Administration', 'Nancy', 54000, '1234567890123456');
+INSERT INTO USERS (LOGIN, PASSWORD, FIRSTNAME, LASTNAME, PHONE, EMAIL, ADDRESS, CITY, ZIP, CARD) VALUES
+('BrVirte', '123', 'Bryan', 'Virte', '+33133831132', 'bryan.virte@projet.gla', '113 Av. Administration', 'Nancy', 54000, '1234567890123456');
+INSERT INTO USERS (LOGIN, PASSWORD, FIRSTNAME, LASTNAME, PHONE, EMAIL, ADDRESS, CITY, ZIP, CARD) VALUES
+('VaThouv', '123', 'Valentin', 'Thouvenin', '+33133831132', 'valentin.thouvenin@projet.gla', '113 Av. Administration', 'Nancy', 54000, '1234567890123456');
 
 INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
-VALUES (1, 1, 'Projet de GLA',
+VALUES (1, 4, 'Projet de GLA',
         'Un projet de master informatique pour une matière appelée génie logiciel avancé à vendre ;)',
-        300.5, 'Service,Informatique,Antiquité,Technologie', '2020-02-28');
+        300.5, 'Service,Informatique,Antiquité,Technologie', '2020-02-29');
 INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
-VALUES (2, 1, 'Test',
-        'Test',
-        255.5, 'Service,Informatique,Tests', '2020-02-28');
+VALUES (2, 2, 'Projet EventB',
+        'Un projet de master informatique pour Dominique Merry sur le magnifique logiciel Rodin ;)',
+        1000, 'Informatique,InFact,Rodin,English,EventB', '2020-03-05');
+INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
+VALUES (3, 1, 'Gauthier',
+        'Il vous aidera pour le front de vos applications quand il s''ennuie',
+        5000, 'Front,Informatique,Génie,OfficeManager,Goat,LeBoss', '2020-03-12');
+INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
+VALUES (4, 1, 'Lot de 5 fléchettes',
+        '',
+        3, 'Fléchettes,Sport,Sport', '2020-02-27');
+INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
+VALUES (5, 1, 'Cible',
+        'Cible pour fléchettes',
+        10, 'Cible,Fléchettes,Sport', '2020-02-27');
+INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
+VALUES (6, 2, 'OfficeManager',
+        'Application de gestion de bureaux',
+        1500, 'Informatique,Application,Projet,Loria,OfficeManager', '2020-03-12');
+INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
+VALUES (7, 1, 'Nintendo Switch',
+        'Console Nintendo Switch deuxième génération en bon état',
+        200, 'Console,Nintendo,Switch,Zelda,Best,Game', '2020-01-20');
+INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
+VALUES (8, 2, 'Ordinateur portable ASUS VivoBook',
+        'Ordinateur en dualboot mais avec une résolution de 800x600 sous Ubuntu',
+        400, 'Ordinateur,Informatique,ALED,Ubuntu,ASUS', '2020-03-16');
+INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
+VALUES (9, 3, 'Ordinateur portable MAC',
+        'MAC qui vous demandera 2 semaines de setup avant d''être fonctionnel',
+        50, 'Ordinateur,Informatique,Antiquité,ALED,MAC', '2020-03-16');
+INSERT INTO ARTICLES (ID, OWNER, NAME, DESCRIPTION, MINPRICE, CATEGORIES, TIME)
+VALUES (10, 5, 'Café Cappuccino',
+        'Café hors de prix de la faculté des Sciences',
+        1.50, 'Fac,Café,Trop,Cher', '2020-02-29');
+
 INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (1, 1, 310.5);
 INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (1, 1, 315.5);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (1, 2, 320.5);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (1, 3, 330);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (1, 2, 1100);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (5, 2, 1200);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (4, 2, 1250);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (4, 2, 1300);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (2, 3, 6000);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (2, 4, 4);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (2, 5, 12);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (3, 6, 1700);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (5, 6, 2000);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (4, 6, 2200);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (2, 7, 215);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (1, 8, 415);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (4, 8, 420);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (3, 8, 450);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (1, 8, 475);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (3, 8, 500);
+INSERT INTO BIDDING (BIDDER, ITEM, BID) VALUES (1, 9, 60);
 
 DELIMITER //
 CREATE PROCEDURE availableArticles()
