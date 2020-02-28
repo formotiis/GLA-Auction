@@ -1,5 +1,7 @@
 package persistence;
 
+import navigation.ActiveUser;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
@@ -24,6 +26,8 @@ public class BidManagerBean implements BidManager {
     private PersonManager personManager;
     @Inject
     private ArticleManager articleManager;
+    @Inject
+    private ActiveUser au;
 
     public BidManagerBean() {
     }
@@ -139,6 +143,7 @@ public class BidManagerBean implements BidManager {
 
             if (a.getEnd().before(new Date())) {
                 personManager.incrementCanceledBid(b.getBidderId());
+                au.reloadUser();
             }
             }
         } catch (SQLException e) {

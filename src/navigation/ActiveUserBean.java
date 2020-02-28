@@ -102,4 +102,10 @@ public class ActiveUserBean implements ActiveUser {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
+
+    public void reloadUser(){
+        if (user!=null){
+            this.user = personManager.getUserByID(user.getId());
+        }
+    }
 }

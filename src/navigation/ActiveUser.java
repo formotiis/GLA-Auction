@@ -12,4 +12,5 @@ public interface ActiveUser extends SessionBean {
     String postLoginRedirect();
     boolean isLogged();
     String homeRedirect();
+    void reloadUser();
 }

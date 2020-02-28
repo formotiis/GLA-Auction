@@ -19,18 +19,18 @@ public class RegistrationBean {
     PersonManager personManager;
 
 
-    private String firstname = "1";
-    private String lastname = "1";
-    private String username = "1";
-    private String password = "1";
-    private String email = "1";
-    private String phone = "1";
-    private String address = "1";
-    private String city = "1";
-    private String card = "1";
+    private String firstname;
+    private String lastname;
+    private String username;
+    private String password;
+    private String email;
+    private String phone;
+    private String address;
+    private String city;
+    private String card;
     private Long id;
     private Integer canceled;
-    private Integer zip = 1;
+    private Integer zip;
     private Person p;
 
 
