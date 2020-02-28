@@ -86,16 +86,16 @@
 
     <div class="card m-4 d-flex">
         <div class="card-header">
-            Articles <b>you</b>, #{activeUser.activeUser.fullName} are selling
+            Articles <b>you</b>, #{activeUser.activeUser.fullName} are selling, or participating in
         </div>
         <div class="card-body">
-            <h:dataTable value="#{articleBean.getOwn(activeUser.activeUser.id)}" var="b"
+            <h:dataTable value="#{articleBean.getOwn(activeUser.activeUser.id, BidBean.getBidsByOwnerId(activeUser.activeUser.id))}" var="b"
                          styleClass="table thead-dark table-striped" >
                 <h:column>
                     <!-- column header -->
                     <f:facet name="header">Retailer</f:facet>
                     <!-- row record -->
-                    #{b.owner.lastName}
+                    #{b.owner.userName}
                 </h:column>
 
                 <h:column>

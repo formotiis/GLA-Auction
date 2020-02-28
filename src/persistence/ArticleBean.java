@@ -151,8 +151,15 @@ public class ArticleBean implements Serializable {
         return articleManager.getById(id);
     }
 
-    public List<Article> getOwn(Long id){
-        return articleManager.getUserListArticles(id);
+    public List<Article> getOwn(Long id, List<Bid> bids){
+        ArrayList<Article> al = (ArrayList<Article>) articleManager.getUserListArticles(id);
+        for (Bid b: bids){
+            Article a = getById(b.getArticleId());
+            if (!al.contains(a)){
+                al.add(a);
+            }
+        }
+        return al;
     }
 
     public String delete(Boolean b,Long id){

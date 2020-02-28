@@ -79,7 +79,7 @@ public class BidManagerBean implements BidManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -99,7 +99,7 @@ public class BidManagerBean implements BidManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override

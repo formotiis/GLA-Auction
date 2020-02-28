@@ -88,7 +88,7 @@
         </h:form>
     </c:if>
     <c:if test="#{activeUser.isLogged() and not(activeUser.activeUser eq articleViewer.article.owner)
-    and not (activeUser.activeUser.canceled >= 3)
+    and not (activeUser.activeUser.canceled >= 2)
     and not(articleViewer.article eq null) and not(articleViewer.isDatePassed())}">
         <h:form class="form-group" styleClass="p-4">
             <div class="form-row">
@@ -125,7 +125,7 @@
             </div>
             </c:if>
     </c:if>
-        <c:if test="#{(activeUser.activeUser.canceled >=3) }">
+        <c:if test="#{(activeUser.activeUser.canceled >=2) }">
             <br/>
             <div class="text-danger">Too many bid cancels, can't get out of this one sorry !</div>
         </c:if>

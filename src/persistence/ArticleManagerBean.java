@@ -140,7 +140,7 @@ public class ArticleManagerBean implements ArticleManager{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
 
     /**
@@ -164,7 +164,7 @@ public class ArticleManagerBean implements ArticleManager{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
 
     /**
@@ -190,7 +190,7 @@ public class ArticleManagerBean implements ArticleManager{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -226,7 +226,7 @@ public class ArticleManagerBean implements ArticleManager{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -266,7 +266,7 @@ public class ArticleManagerBean implements ArticleManager{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public Article getArticle(ResultSet rs) throws SQLException {
