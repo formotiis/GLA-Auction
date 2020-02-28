@@ -108,7 +108,17 @@ public class Article implements Serializable {
                 list.add(c);
             }
         }
-        return list;
+        return removeDuplicates(list);
+    }
+
+    public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list) {
+        ArrayList<T> newList = new ArrayList<>();
+        for (T element : list) {
+            if (!newList.contains(element)) {
+                newList.add(element);
+            }
+        }
+        return newList;
     }
 
     @Override
