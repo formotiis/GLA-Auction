@@ -16,7 +16,13 @@
         </ui:insert>
     </div>
 
+
     <f:view>
+        <c:if test="#{articleBean.specialOffers.contains(articleViewer.article)}">
+            <div class="alert alert-success" role="alert">
+                This article is on Sale today !
+            </div>
+        </c:if>
     <c:if test="#{articleViewer.article eq null}">
         The article entry you requested does not exist.
     </c:if>

@@ -32,6 +32,7 @@ public class ArticleManagerBean implements ArticleManager{
 
     @PostConstruct
     public void initialize() {
+        specialOffers = new ArrayList<>();
         try {
             connection = dataSource.getConnection();
         } catch (SQLException sqle) {
@@ -83,7 +84,7 @@ public class ArticleManagerBean implements ArticleManager{
 
             sb.append(article.getPrice())
                     .append("\',\'")
-                    .append(article.getCategories())
+                    .append(article.getCategoriesAsCSV())
                     .append("\',\'")
                     .append(localDate).append('\'');
             sb.append(")");
@@ -229,7 +230,7 @@ public class ArticleManagerBean implements ArticleManager{
     }
 
     @Override
-    @Schedule(second="0", minute="0", hour="0",
+    @Schedule(second="0", minute="*", hour="*",
               dayOfMonth="*", month="*", year="*")
     public void generateSpecialOffers() {
         try {
@@ -242,6 +243,7 @@ public class ArticleManagerBean implements ArticleManager{
                 Article a = getArticle(rs);
                 specialOffers.add(a);
             }
+            System.out.println(specialOffers);
         } catch (SQLException e) {
             e.printStackTrace();
         }
