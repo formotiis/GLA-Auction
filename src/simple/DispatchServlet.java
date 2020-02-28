@@ -36,7 +36,6 @@ public class DispatchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("SERVLET");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String userPath = request.getServletPath();

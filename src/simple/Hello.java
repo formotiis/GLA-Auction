@@ -42,8 +42,7 @@ public class Hello {
     }
 
     public String sayHello() {
-        System.out.println("Name = "+name);  
-        return greet.greet(name);  
+        return greet.greet(name);
     }
 
     /*public String complimentThem(){

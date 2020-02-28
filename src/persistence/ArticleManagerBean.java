@@ -230,7 +230,7 @@ public class ArticleManagerBean implements ArticleManager{
     }
 
     @Override
-    @Schedule(second="0", minute="*", hour="*",
+    @Schedule(second="0", minute="0", hour="0",
               dayOfMonth="*", month="*", year="*")
     public void generateSpecialOffers() {
         try {

@@ -108,10 +108,6 @@ public class ArticleBean implements Serializable {
 
     public void setCategories(String cat) {
         String[] splitCat = cat.split(",");
-        for (String s : splitCat){
-            System.out.println(s);
-        }
-        System.out.println(splitCat);
         this.categories = Arrays.asList(splitCat);
     }
 
@@ -142,7 +138,6 @@ public class ArticleBean implements Serializable {
     public String getCategoriesAsCSV(){
         StringBuilder sb = new StringBuilder();
         for (String s:categories) {
-            System.out.println("CSV: "+ s +";");
             sb.append(s).append(',');
         }
         return sb.toString();

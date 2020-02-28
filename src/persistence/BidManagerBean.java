@@ -73,7 +73,6 @@ public class BidManagerBean implements BidManager {
             List<Bid> bidList = new ArrayList<>();
             while (rs.next()){
                 Bid b = getBid(rs);
-                System.err.println(b);
                 bidList.add(b);
             }
             return bidList;
