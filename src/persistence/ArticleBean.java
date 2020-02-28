@@ -163,6 +163,7 @@ public class ArticleBean implements Serializable {
     public String delete(Boolean b,Long id){
         if(b)
             articleManager.delete(id);
+        restoreDefault();
         return "home";
     }
 
@@ -174,6 +175,7 @@ public class ArticleBean implements Serializable {
             end = formatter.parse(endDate);
             Article a = new Article(activeUser.getActiveUser(), name, price, end, getCategoriesAsCSV(), description);
             articleManager.addNew(a);
+            restoreDefault();
             return "home";
         }
         catch(Exception e){
