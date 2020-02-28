@@ -24,7 +24,9 @@
             </div>
         </c:if>
     <c:if test="#{articleViewer.article eq null}">
-        The article entry you requested does not exist.
+        <div class="m-4">
+            The article entry you requested does not exist.
+        </div>
     </c:if>
     <c:if test="#{not(articleViewer.article eq null)}">
         <div class="card text-center border-success m-4">
@@ -108,17 +110,19 @@
                     </h:commandButton>
                 </div>
             </div>
+        </h:form>
             <c:if test="#{not (BidBean.getArticleHighestBidByOwner(articleViewer.id, activeUser.activeUser.id) eq null)}">
-            <div class="form-row">
+            <div class="form-row m-4">
                 <div class="form-group">
+                    <h:form>
                     Latest bid: #{BidBean.getArticleHighestBidByOwner(articleViewer.id, activeUser.activeUser.id).bidValue}$
                     #{activeUser.activeUser.canceled}
                         <h:commandButton action="#{BidBean.deleteBid(BidBean.getArticleHighestBidByOwner(articleViewer.id, activeUser.activeUser.id).id)}" styleClass="btn btn-danger" value="Delete Bid">
                         </h:commandButton>
+                    </h:form>
                 </div>
             </div>
             </c:if>
-        </h:form>
     </c:if>
         <c:if test="#{(activeUser.activeUser.canceled >=3) }">
             <br/>

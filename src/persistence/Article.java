@@ -102,7 +102,7 @@ public class Article implements Serializable {
 
     private List<String> fromCSV(String entry){
         String[] csv = entry.split(",");
-        List<String> list = new ArrayList<>(csv.length);
+        ArrayList<String> list = new ArrayList<>(csv.length);
         for (String c: csv){
             if (!"".equals(c)){
                 list.add(c);
