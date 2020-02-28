@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.Date;
 
 @ManagedBean(name="articleViewer")
 @ViewScoped
@@ -21,14 +22,8 @@ public class ArticleViewerBean implements Serializable {
 
     Article article;
 
-    Boolean deletion;
-
     @Inject
     ArticleManager articleManager;
-
-    public ArticleViewerBean() {
-        deletion = false;
-    }
 
     public Long getId() {
         return id;
@@ -54,12 +49,8 @@ public class ArticleViewerBean implements Serializable {
         this.bid = bid;
     }
 
-    public Boolean getDeletion() {
-        return deletion;
-    }
-
-    public void setDeletion(Boolean deletion) {
-        this.deletion = deletion;
+    public Boolean isDatePassed(){
+        return article.getEnd().before(new Date());
     }
 
     @PostConstruct
@@ -69,7 +60,4 @@ public class ArticleViewerBean implements Serializable {
         this.article = this.articleManager.getById(this.id);
     }
 
-    public void updateData(ActionEvent e) {
-        deletion = true;
-    }
 }
