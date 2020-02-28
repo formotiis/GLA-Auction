@@ -87,10 +87,9 @@
         </h:commandButton>
         </h:form>
     </c:if>
-    <c:if test="#{activeUser.isLogged() and not(activeUser.activeUser eq articleViewer.article.owner)
-    and not (activeUser.activeUser.canceled >= 2)
-    and not(articleViewer.article eq null) and not(articleViewer.isDatePassed())}">
+        <c:if test="#{activeUser.isLogged() and not(activeUser.activeUser eq articleViewer.article.owner) and not (activeUser.activeUser.canceled >= 2) and not(articleViewer.article eq null)}">
         <h:form class="form-group" styleClass="p-4">
+            <c:if test="#{not(articleViewer.isDatePassed())}">
             <div class="form-row">
                 <div class="form-group">
                     <div class="input-group mb-3">
@@ -112,6 +111,7 @@
                     </h:commandButton>
                 </div>
             </div>
+            </c:if>
         </h:form>
             <c:if test="#{not (BidBean.getArticleHighestBidByOwner(articleViewer.id, activeUser.activeUser.id) eq null)}">
             <div class="form-row m-4">
