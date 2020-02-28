@@ -20,9 +20,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author cirstea
  */
 public class DispatchServlet extends HttpServlet {
-
-    @Inject 
-    Greeting greet;
     //@Inject
     //ComplimentBean compliment;
     /**
@@ -41,7 +38,7 @@ public class DispatchServlet extends HttpServlet {
         String userPath = request.getServletPath();
 
         String name = (String) request.getParameter("name");
-        String helloMessage = greet.greet(name);
+        String helloMessage = "hello " + name;
         //String helloMessage = compliment.compliment(name);
 
         out.println("<html>");
